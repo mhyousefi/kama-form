@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import TextField from '../components/TextField'
 import PersianDict from '../utils/PersianDict'
+import QuestionInfo from '../utils/QuestionInfo'
 import '../css/main.css'
 import '../css/texts.css'
 import '../css/util.css'
+import RadioQuestion from '../components/RadioQuestion'
+import CheckboxQuestion from '../components/CheckboxQuestion'
 
 export default class FormPage extends Component {
   constructor (props) {
@@ -14,8 +17,19 @@ export default class FormPage extends Component {
       email: '',
       nationalId: '',
       phoneNumber: '',
-      areasToParticipate: [],
-
+      isUtStudent: false,
+      isBachelor: false,
+      isMaster: false,
+      isPhd: false,
+      bachelorsId: '',
+      bachelorsClass: '',
+      masterId: '',
+      masterClass: '',
+      masterInfo: '',
+      phdId: '',
+      phdClass: '',
+      phdInfo: '',
+      areasOfInterest: [],
     }
   }
 
@@ -39,7 +53,73 @@ export default class FormPage extends Component {
     this.setState({phoneNumber: newValue})
   }
 
+  _handleIsUtStudentChange = (newValue) => {
+    this.setState({isUtStudent: newValue === 'بله'})
+  }
+
+  _handleStudyLevelCheckboxClick = (studyLevel, checkedState) => {
+    if (studyLevel === PersianDict['bachelor']) {
+      this.setState({isBachelor: checkedState})
+    } else if (studyLevel === PersianDict['master']) {
+      this.setState({isMaster: checkedState})
+    } else if (studyLevel === PersianDict['phd']) {
+      this.setState({isPhd: checkedState})
+    }
+  }
+
+  _handleBachelorsIdChange = (newValue) => {
+    this.setState({bachelorsId: newValue})
+  }
+
+  _handleBachelorsClassChange = (newValue) => {
+    this.setState({bachelorsClass: newValue})
+  }
+
+  _handleMasterIdChange = (newValue) => {
+    this.setState({masterId: newValue})
+  }
+
+  _handleMasterClassChange = (newValue) => {
+    this.setState({masterClass: newValue})
+  }
+
+  _handleMasterInfoChange = (newValue) => {
+    this.setState({masterInfo: newValue})
+  }
+
+  _handlePhdIdChange = (newValue) => {
+    this.setState({phdId: newValue})
+  }
+
+  _handlePhdClassChange = (newValue) => {
+    this.setState({phdClass: newValue})
+  }
+
+  _handlePhdInfoChange = (newValue) => {
+    this.setState({phdInfo: newValue})
+  }
+
+  _handleAreasOfInterestChange = (area, checked) => {
+    const { areasOfInterest } = this.state
+    let newAreasOfInterest = []
+    if (checked) {
+      if (!areasOfInterest.includes(area)) {
+        newAreasOfInterest = areasOfInterest
+        newAreasOfInterest.push(area)
+        this.setState({areasOfInterest: newAreasOfInterest})
+      }
+    } else {
+      let index = areasOfInterest.indexOf(area)
+      if (index !== -1) {
+        newAreasOfInterest = areasOfInterest
+        newAreasOfInterest.splice(index, 1)
+        this.setState({areasOfInterest: newAreasOfInterest})
+      }
+    }
+  }
+
   render () {
+    const { isUtStudent, isBachelor, isMaster, isPhd } = this.state
     return (
       <div className="bg-contact3">
         <div className="container-contact3">
@@ -48,6 +128,10 @@ export default class FormPage extends Component {
               <span className="contact3-form-text-title">
                 {PersianDict['form title']}
               </span>
+
+              {this.state.areasOfInterest.map((elem, key) => (
+                <div>{elem}</div>
+              ))}
 
               <TextField
                 placeholder={PersianDict['first name']}
@@ -61,81 +145,39 @@ export default class FormPage extends Component {
                 placeholder={PersianDict['national code']}
                 handleChange={this._handleNationalIdChange}
               />
+              <br/>
 
-              <span className="contact3-form-text-question">
-                آیا دانشجو یا فارغ التحصیل معماری دانشگاه تهران هستید؟
-              </span>
+              <RadioQuestion
+                questionTxt={QuestionInfo['are you from UT']['question']}
+                answers={QuestionInfo['are you from UT']['answers']}
+                handleRadioChange={this._handleIsUtStudentChange}
+              />
 
-              <div className="wrap-contact3-form-radio">
-                <div className="contact3-form-radio m-r-42">
-                  <input className="input-radio3" id="radio1" type="radio" name="choice" value="yes"/>
-                  <label className="label-radio3 contact3-form-text-answer" for="radio1">
-                    بله
-                  </label>
-                </div>
+              <CheckboxQuestion
+                questionTxt={QuestionInfo['study level']['question']}
+                answers={QuestionInfo['study level']['answers']}
+                handleCheckboxChange={this._handleStudyLevelCheckboxClick}
+              />
 
-                <div className="contact3-form-radio">
-                  <input className="input-radio3" id="radio2" type="radio" name="choice" value="no"/>
-                  <label className="label-radio3 contact3-form-text-answer" for="radio2">
-                    خیر
-                  </label>
-                </div>
-              </div>
+              {(isUtStudent && isBachelor) && <div>BACHELOR</div>}
+              {(isUtStudent && isMaster) && <div>MASTER</div>}
+              {(isUtStudent && isPhd) && <div>PHD</div>}
 
-              <span className="contact3-form-text-question">
-                در چه زمینه ای علاقه مند به تدریس هستید؟
-              </span>
+              <TextField
+                placeholder={PersianDict['phone number']}
+                handleChange={this._handlePhoneNumberChange}
+              />
+              <TextField
+                placeholder={PersianDict['email']}
+                handleChange={this._handleEmailChange}
+              />
+              <br/>
 
-              <div className="wrap-contact3-form-radio m-r-42">
-                <div className="contact3-form-radio m-r-42">
-                  <input className="input-radio3" id="checkbox1" type="checkbox" name="ch11"/>
-                  <label className="label-radio3 contact3-form-text-answer" for="checkbox1">
-                    AutoCAD 2D
-                  </label>
-                </div>
-
-                <div className="contact3-form-radio">
-                  <input className="input-radio3" id="checkbox2" type="checkbox" name="ch12"/>
-                  <label className="label-radio3 contact3-form-text-answer" for="checkbox2">
-                    AutoCAD 3D
-                  </label>
-                </div>
-
-                <div className="contact3-form-radio">
-                  <input className="input-radio3" id="checkbox3" type="checkbox" name="choice13" value="get-quote"/>
-                  <label className="label-radio3 contact3-form-text-answer" for="checkbox3">
-                    Photoshop PostPorduction
-                  </label>
-                </div>
-
-                <div className="contact3-form-radio">
-                  <input className="input-radio3" id="checkbox4" type="checkbox" name="choice14" value="get-quote"/>
-                  <label className="label-radio3 contact3-form-text-answer" for="checkbox4">
-                    Photoshop شیت بندی
-                  </label>
-                </div>
-
-                <div className="contact3-form-radio">
-                  <input className="input-radio3" id="checkbox5" type="checkbox" name="choice13" value="get-quote"/>
-                  <label className="label-radio3 contact3-form-text-answer" for="checkbox5">
-                    Illustrator
-                  </label>
-                </div>
-
-                <div className="contact3-form-radio">
-                  <input className="input-radio3" id="checkbox6" type="checkbox" name="choice13" value="get-quote"/>
-                  <label className="label-radio3 contact3-form-text-answer" for="checkbox6">
-                    Coreldraw
-                  </label>
-                </div>
-
-                <div className="contact3-form-radio">
-                  <input className="input-radio3" id="checkbox7" type="checkbox" name="choice13" value="get-quote"/>
-                  <label className="label-radio3 contact3-form-text-answer" for="checkbox7">
-                    Sketch Up
-                  </label>
-                </div>
-              </div>
+              <CheckboxQuestion
+                questionTxt={QuestionInfo['areas of interest']['question']}
+                answers={QuestionInfo['areas of interest']['answers']}
+                handleCheckboxChange={this._handleAreasOfInterestChange}
+              />
 
               <div className="wrap-input3 validate-input" data-validate="Message is required">
                 <textarea className="input3" name="message" placeholder="پیام شما"></textarea>

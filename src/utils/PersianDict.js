@@ -5,4 +5,14 @@ module.exports = {
   'national code': 'کد ملی',
   'email': 'ایمیل',
   'phone number': 'شماره تماس (همراه)',
+
+  'more info': 'توضیحات بیشتر',
+  'more items': 'موارد بیشتر/توضیحات بیشتر',
+
+  'yes': 'بله',
+  'no': 'خیر',
+
+  'bachelor': 'کارشناسی',
+  'master': 'کارشناسی ارشد',
+  'phd': 'دکتری',
 }
