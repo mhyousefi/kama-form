@@ -1,0 +1,31 @@
+.contact3-form-text-title {
+  display: block;
+  font-family: "B Nazanin+ Bold";
+  font-size: 40px;
+  color: #127264;
+  line-height: 1.2;
+  text-align: center;
+  padding-bottom: 70px;
+
+  direction: rtl;
+}
+
+.contact3-form-text-question {
+  display: block;
+  font-family: "Arial";
+  font-size: 20px;
+  color: #191919;
+  line-height: 1.2;
+  text-align: right;
+
+  direction: rtl;
+}
+
+.contact3-form-text-answer {
+  display: block;
+  font-family: "Arial";
+  font-size: 16px;
+  color: #909090;
+  line-height: 1.2;
+  font-wieght: 100px;
+}
