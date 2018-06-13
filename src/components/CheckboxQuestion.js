@@ -30,6 +30,7 @@ export default class CheckboxQuestion extends Component {
               <label className="label-radio3 contact3-form-text-answer" for={"checkbox-" + answer}>
                 {answer}
               </label>
+              {/*{(index === 0 && this.props.x) && }*/}
             </div>
           </div>
         ))}

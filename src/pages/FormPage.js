@@ -7,6 +7,10 @@ import '../css/texts.css'
 import '../css/util.css'
 import RadioQuestion from '../components/RadioQuestion'
 import CheckboxQuestion from '../components/CheckboxQuestion'
+import BachelorInfo from '../components/BachelorInfo'
+import MasterInfo from '../components/MasterInfo'
+import PhDInfo from '../components/PhDInfo'
+import CollegeEduInfo from '../components/CollegeEduInfo'
 
 export default class FormPage extends Component {
   constructor (props) {
@@ -67,11 +71,11 @@ export default class FormPage extends Component {
     }
   }
 
-  _handleBachelorsIdChange = (newValue) => {
+  _handleBachelorIdChange = (newValue) => {
     this.setState({bachelorsId: newValue})
   }
 
-  _handleBachelorsClassChange = (newValue) => {
+  _handleBachelorClassChange = (newValue) => {
     this.setState({bachelorsClass: newValue})
   }
 
@@ -120,6 +124,10 @@ export default class FormPage extends Component {
 
   render () {
     const { isUtStudent, isBachelor, isMaster, isPhd } = this.state
+    let x = (isUtStudent && isBachelor) ? <BachelorInfo
+      handleIdChange={this._handleBachelorsIdChange}
+      handleClassChange={this._handleBachelorsClassChange}
+    /> : <div/>
     return (
       <div className="bg-contact3">
         <div className="container-contact3">
@@ -153,15 +161,19 @@ export default class FormPage extends Component {
                 handleRadioChange={this._handleIsUtStudentChange}
               />
 
-              <CheckboxQuestion
-                questionTxt={QuestionInfo['study level']['question']}
-                answers={QuestionInfo['study level']['answers']}
-                handleCheckboxChange={this._handleStudyLevelCheckboxClick}
-              />
+              {this.state.isUtStudent && <CollegeEduInfo
+                handleStudyLevelChange={this._handleStudyLevelCheckboxClick}
+                handleBachelorIdChange={this._handleBachelorIdChange}
+                handleBachelorClassChange={this._handleBachelorClassChange}
+                handleMasterIdChange={this._handleMasterIdChange}
+                handleMasterClassChange={this._handleMasterClassChange}
+                handleMasterInfoChange={this._handleMasterInfoChange}
+                handlePhdIdChange={this._handlePhdIdChange}
+                handlePhdClassChange={this._handlePhdClassChange}
+                handlePhdInfoChange={this._handlePhdInfoChange}
+              />}
 
-              {(isUtStudent && isBachelor) && <div>BACHELOR</div>}
-              {(isUtStudent && isMaster) && <div>MASTER</div>}
-              {(isUtStudent && isPhd) && <div>PHD</div>}
+              <br/><br/>
 
               <TextField
                 placeholder={PersianDict['phone number']}
