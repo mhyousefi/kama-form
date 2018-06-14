@@ -4,11 +4,12 @@ var json2xls = require('json2xls');
 var path = require('path')
 var multer = require('multer');
 var os = require('os');
-var home = os.homedir();
+var uploadsDir = os.homedir() + '/uploads';
+var zipFolder = require('zip-folder');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, home+'/uploads')
+    cb(null, uploadsDir)
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + Math.round(Math.random()*1000) + path.extname(file.originalname)) //Appending extension
@@ -16,6 +17,18 @@ var storage = multer.diskStorage({
 })
 
 var upload = multer({ storage: storage });
+
+zipFolderPromise = function (x, y) {
+  return new Promise((resolve, reject)=> {
+    zipFolder(x, y, resolve)
+  })
+}
+router.get('/getUploads', async (req, res) => {
+  let result = `/tmp/uploads ${Date.now()}.zip`
+  await zipFolderPromise(uploadsDir, result)
+  res.contentType('application/zip')
+  res.sendFile(result)
+})
 
 router.post('/addEntry',upload.single('file'), async (req, res) => {
   try {
