@@ -30,5 +30,9 @@ module.exports = {
   'teaching experience': {
     question: 'آیا سابقه تدریس دارید؟',
     answers: ['بله', 'خیر']
+  },
+  'class timing': {
+    question: 'نحوه تشکیل کلاس:',
+    answers: ['هفتگی', 'فشرده-کارگاه'],
   }
 }

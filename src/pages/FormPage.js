@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 import TextField from '../components/TextField'
 import PersianDict from '../utils/PersianDict'
 import QuestionInfo from '../utils/QuestionInfo'
-import '../css/main.css'
-import '../css/texts.css'
-import '../css/util.css'
 import RadioQuestion from '../components/RadioQuestion'
 import CheckboxQuestion from '../components/CheckboxQuestion'
 import BachelorInfo from '../components/BachelorInfo'
-import MasterInfo from '../components/MasterInfo'
-import PhDInfo from '../components/PhDInfo'
 import CollegeEduInfo from '../components/CollegeEduInfo'
 import BackgroundInfo from '../components/BackgroundInfo'
+import ClassTimingInfo from '../components/ClassTimingInfo'
+
+import '../css/main.css'
+import '../css/texts.css'
+import '../css/util.css'
 
 export default class FormPage extends Component {
   constructor (props) {
@@ -36,6 +36,10 @@ export default class FormPage extends Component {
       phdInfo: '',
       areasOfInterest: [],
 
+      isWeekly: false,
+      weeklyHours: ['', '', '', '', '', ''],
+      isWorkshop: false,
+      workshopDuration: 0,
 
       hasExperience: false,
       experienceDetail: '',
@@ -135,6 +139,24 @@ export default class FormPage extends Component {
     this.setState({experienceDetail: newValue})
   }
 
+  _handleIsWeeklyChange = (newValue) => {
+    this.setState({isWeekly: newValue})
+  }
+
+  _handleIsWorkshopChange = (newValue) => {
+    this.setState({isWorkshop: newValue})
+  }
+
+  _handleWorkshopDurationChange = (newValue) => {
+    this.setState({workshopDuration: newValue})
+  }
+
+  _handleWeeklyHoursChange = (index, newValue) => {
+    let newWeeklyHours = this.state.weeklyHours
+    newWeeklyHours[index] = newValue
+    this.setState({weeklyHours: newWeeklyHours})
+  }
+
   render () {
     const { isUtStudent, isBachelor, isMaster, isPhd } = this.state
     let x = (isUtStudent && isBachelor) ? <BachelorInfo
@@ -198,6 +220,15 @@ export default class FormPage extends Component {
                 questionTxt={QuestionInfo['areas of interest']['question']}
                 answers={QuestionInfo['areas of interest']['answers']}
                 handleCheckboxChange={this._handleAreasOfInterestChange}
+              />
+
+              <br/><br/>
+
+              <ClassTimingInfo
+                handleIsWeeklyChange={this._handleIsWeeklyChange}
+                handleIsWorkshopChange={this._handleIsWorkshopChange}
+                handleWorkshopDurationChange={this._handleWorkshopDurationChange}
+                handleWeeklyHoursChange={this._handleWeeklyHoursChange}
               />
 
               <br/><br/>

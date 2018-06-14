@@ -24,6 +24,19 @@ module.exports = {
   'master': 'کارشناسی ارشد',
   'phd': 'دکتری',
 
+  'weekly': 'هفتگی',
+  'workshop': 'فشرده-کارگاه',
+
+  'workshop duration': 'مدت کارگاه',
+  'hours available': 'ساعات مناسب شما در این روز',
+
+  'saturday': 'شنبه',
+  'sunday': 'یک شنبه',
+  'monday': 'دو شنبه',
+  'tuesday': 'سه شنبه',
+  'wednesday': 'چهار شنبه',
+  'thursday': 'پنج شنبه',
+
   'send your resume': 'فایل PDF رزومه خود را در این قسمت آپلود کنید',
   'file should include': 'فایل ارسالی حتما شامل این موارد باشد:',
   'specs description': 'مشخصات: تصویر ۳ در ۴، معرفی و مشخصات فردی و راه های ارتباطی',

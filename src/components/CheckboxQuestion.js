@@ -5,34 +5,34 @@ import '../css/util.css'
 
 export default class CheckboxQuestion extends Component {
   _onChange = (e) => {
-    const { handleCheckboxChange } = this.props
+    const {handleCheckboxChange} = this.props
     handleCheckboxChange(e.target.value, e.target.checked)
   }
 
-  render() {
-    const { questionTxt, answers } = this.props
+  render () {
+    const {questionTxt, answers} = this.props
     return (
       <div>
         <span className="contact3-form-text-question fs-24">
           {questionTxt}
         </span>
 
-        {answers.map((answer, index) => (
-          <div className="wrap-contact3-form-radio m-r-42">
+        <div className="wrap-contact3-form-radio m-r-42">
+          {answers.map((answer, index) => (
             <div className="contact3-form-radio m-r-42">
               <input
                 className="input-radio3"
                 type="checkbox"
-                id={"checkbox-" + answer}
+                id={'checkbox-' + answer}
                 value={answer}
                 onChange={this._onChange}
               />
-              <label className="label-radio3 contact3-form-text-answer fs-18" for={"checkbox-" + answer}>
+              <label className="label-radio3 contact3-form-text-answer fs-18" for={'checkbox-' + answer}>
                 {answer}
               </label>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     )
   }
