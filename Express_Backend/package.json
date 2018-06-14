@@ -20,13 +20,13 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "json2xls": "0.1.2",
     "nodemon": "^1.17.5",
     "npm": "^6.1.0",
     "path": "^0.12.7",
     "process": "latest",
     "request": "^2.87.0",
     "sequelize": "^4.37.10",
-    "sqlite3": "^4.0.0",
-    "xlsx": "^0.13.0"
+    "sqlite3": "^4.0.0"
   }
 }

@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const formEntryRepo = require('../domain/formEntryRepo')
-const XLSX = require('xlsx')
+var json2xls = require('json2xls');
 
 router.post('/addEntry', async (req, res) => {
   try {
@@ -69,29 +69,12 @@ router.post('/uploadFile', async (req, res) => {
 
 router.get('/', async (req, res) => {
 
-  try {
-    let data = [
-      ['id', 'name', 'value'],
-      [1, 'sheetjs', 7262],
-      [2, 'js-xlsx', 6969],
-    ]
+  let data = [
+    {id: 1, name: 'sheetjs', value: 7262},
+    {id: 2, name: 'js-xlsx', value: 6969},
+  ]
 
-    const entries = await formEntryRepo.getAllEntries()
-    console.log(`entries[0] = ${JSON.stringify(entries[0])}`)
-
-
-    // let workbook = XLSX.utils.book_new()
-    // workbook.Props = {
-    //   Title: 'Form Data',
-    // }
-    // workbook.SheetNames.push('form entries')
-    // workbook.Sheets['Form sheet'] = XLSX.utils.aoa_to_sheet(data.data)
-
-    let fileName = 'form_data.xlsx'
-    // res.setHeader('Content-disposition', 'attachment; filename=' + fileName)
-    // res.setHeader('Content-type', 'application/xlsx')
-    res.send('workbook')
-  } catch (e) {}
+  res.xls('kama.xlsx', data)
 })
 
 module.exports = router
