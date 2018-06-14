@@ -21,7 +21,7 @@ router.post('/addEntry',upload.single('file'), async (req, res) => {
   try {
     let params = await req.body
     params = JSON.parse(params.formData)
-    const fileName = req.file.filename()
+    // const fileName = req.file.filename()
     const entryCount = await formEntryRepo.getEntryCount()
     const newEntry = {
       id: entryCount.toString(),
@@ -48,10 +48,12 @@ router.post('/addEntry',upload.single('file'), async (req, res) => {
       weeklyHours: JSON.stringify(params.weeklyHours),
       isWorkshop: params.isWorkshop,
       workshopDuration: params.workshopDuration,
+      // resumeFilename: fileName,
     }
     await formEntryRepo.addFormEntry(newEntry)
     res.send(JSON.stringify({status: 'OK'}))
   } catch (e) {
+    console.log(`Error: ${e.message}`)
     res.send(JSON.stringify({status: 'ERROR'}))
   }
 })
@@ -90,29 +92,34 @@ router.get('/', async (req, res) => {
   entries.forEach((item) => {
     let excelRow = {
       id: item.id,
-      firstName: item.firstName,
-      lastName: item.lastName,
-      nationalId: item.nationalId,
-      email: item.email,
-      phoneNumber: item.phoneNumber,
-      isUtStudent: item.isUtStudent,
-      bachelorsId: item.bachelorsId,
-      bachelorsClass: item.bachelorsClass,
-      masterId: item.masterId,
-      masterClass: item.masterClass,
-      masterInfo: item.masterInfo,
-      phdId: item.phdId,
-      phdClass: item.phdClass,
-      phdInfo: item.phdInfo,
-      otherUnivInfo: item.otherUnivInfo,
-      areasOfInterest: item.areasOfInterest,
-      areasOfInterestMoreInfo: item.areasOfInterestMoreInfo,
-      isWeekly: item.isWeekly,
-      weeklyHours: item.weeklyHours,
-      isWorkshop: item.isWorkshop,
-      workshopDuration: item.workshopDuration,
-      hasExperience: item.hasExperience,
-      experienceDetail: item.experienceDetail,
+      'نام': item.firstName,
+      'نام خانوادگی': item.lastName,
+      'کد ملی': item.nationalId,
+      'ایمیل': item.email,
+      'شماره تلفن': item.phoneNumber,
+      'دانشجوی دانشگاه تهران؟': item.isUtStudent,
+      'شماره دانشجویی کارشناسی': item.bachelorsId,
+      'سال ورودی کارشناسی': item.bachelorsClass,
+      'شماره دانشجویی کارشناسی ارشد': item.masterId,
+      'سال ورودی کارشناسی ارشد': item.masterClass,
+      'جزئیات کارشناسی ارشد': item.masterInfo,
+      'شماره دانشجویی دکتری': item.phdId,
+      'سال ورودی دکتری': item.phdClass,
+      'جزئیات دکتری': item.phdInfo,
+      'اطلاعات دانشگاه دیگر': item.otherUnivInfo,
+      'حوزه های مورد علاقه': item.areasOfInterest,
+      'جزئیات': item.areasOfInterestMoreInfo,
+      'کلاس های هفتگی': item.isWeekly,
+      'شنبه': item.weeklyHours[0],
+      'یک شنبه': item.weeklyHours[1],
+      'دو شنبه': item.weeklyHours[2],
+      'سه شنبه': item.weeklyHours[3],
+      'چهار شنبه': item.weeklyHours[4],
+      'پنج شنبه': item.weeklyHours[5],
+      'فشرده - کارگاهی': item.isWorkshop,
+      'مدت کارگاه': item.workshopDuration,
+      'تجربه تدریس؟': item.hasExperience,
+      'جزئیات تدریس': item.experienceDetail,
     }
     excelData.push(excelRow)
   })
