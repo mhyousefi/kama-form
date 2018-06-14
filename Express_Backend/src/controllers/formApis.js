@@ -19,8 +19,9 @@ var upload = multer({ storage: storage });
 
 router.post('/addEntry',upload.single('file'), async (req, res) => {
   try {
-    const params = await req.body
-    console.log(req.file)
+    let params = await req.body
+    params = JSON.parse(params.formData)
+    const fileName = req.file.filename()
     const entryCount = await formEntryRepo.getEntryCount()
     const newEntry = {
       id: entryCount.toString(),
