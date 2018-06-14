@@ -7,7 +7,7 @@ import CheckboxQuestion from '../components/CheckboxQuestion'
 import CollegeEduInfo from '../components/CollegeEduInfo'
 import BackgroundInfo from '../components/BackgroundInfo'
 import ClassTimingInfo from '../components/ClassTimingInfo'
-import { addFormEntryApi, uploadFile } from '../api/FormEntryApis'
+import { addFormEntryApi } from '../api/FormEntryApis'
 import '../css/main.css'
 import '../css/texts.css'
 import '../css/util.css'
@@ -58,47 +58,44 @@ export default class FormPage extends Component {
 
     let resumeFileInput = document.getElementById('resumeFile')
     let resume = resumeFileInput.files[0]
-    uploadFile(resume).then((response) => {
-      fileUploaded = response
-    })
 
-    // let newEntry = {
-    //   firstName: this.state.firstName,
-    //   lastName: this.state.lastName,
-    //   email: this.state.email,
-    //   nationalId: this.state.nationalId,
-    //   phoneNumber: this.state.phoneNumber,
-    //
-    //   isUtStudent: this.state.collegeEduStatus === 'UT',
-    //   bachelorsId: this.state.bachelorsId,
-    //   bachelorsClass: this.state.bachelorsClass,
-    //   masterId: this.state.masterId,
-    //   masterClass: this.state.masterClass,
-    //   masterInfo: this.state.masterInfo,
-    //   phdId: this.state.phdId,
-    //   phdClass: this.state.phdClass,
-    //   phdInfo: this.state.phdInfo,
-    //   otherUnivInfo: this.state.otherUnivInfo,
-    //
-    //   areasOfInterest: this.state.areasOfInterest,
-    //   areasOfInterestMoreInfo: this.state.areasOfInterestMoreInfo,
-    //
-    //   isWeekly: this.state.isWeekly,
-    //   weeklyHours: this.state.weeklyHours,
-    //   isWorkshop: this.state.isWorkshop,
-    //   workshopDuration: this.state.workshopDuration,
-    //
-    //   hasExperience: this.state.hasExperience,
-    //   experienceDetail: this.state.experienceDetail,
-    // }
-    //
-    // addFormEntryApi(newEntry).then((response) => {
-    //   if (response === true && fileUploadStatus === true) {
-    //     this._successfulSubmit()
-    //   } else {
-    //     this._failedSubmit()
-    //   }
-    // })
+    let newEntry = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      nationalId: this.state.nationalId,
+      phoneNumber: this.state.phoneNumber,
+
+      isUtStudent: this.state.collegeEduStatus === 'UT',
+      bachelorsId: this.state.bachelorsId,
+      bachelorsClass: this.state.bachelorsClass,
+      masterId: this.state.masterId,
+      masterClass: this.state.masterClass,
+      masterInfo: this.state.masterInfo,
+      phdId: this.state.phdId,
+      phdClass: this.state.phdClass,
+      phdInfo: this.state.phdInfo,
+      otherUnivInfo: this.state.otherUnivInfo,
+
+      areasOfInterest: this.state.areasOfInterest,
+      areasOfInterestMoreInfo: this.state.areasOfInterestMoreInfo,
+
+      isWeekly: this.state.isWeekly,
+      weeklyHours: this.state.weeklyHours,
+      isWorkshop: this.state.isWorkshop,
+      workshopDuration: this.state.workshopDuration,
+
+      hasExperience: this.state.hasExperience,
+      experienceDetail: this.state.experienceDetail,
+    }
+
+    addFormEntryApi(newEntry, resume).then((response) => {
+      if (response === true) {
+        this._successfulSubmit()
+      } else {
+        this._failedSubmit()
+      }
+    })
   }
 
   _successfulSubmit = () => {

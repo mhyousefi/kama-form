@@ -51,7 +51,7 @@ export default class ClassTimingInfo extends Component {
               value={answers[0]}
               onChange={this._onIsWeeklyChange}
             />
-            <label className="label-radio3 contact3-form-text-answer fs-18 text-grey" for={'checkbox-' + answers[0]}>
+            <label className="label-radio3 contact3-form-text-answer fs-18 text-grey" htmlFor={'checkbox-' + answers[0]}>
               {answers[0]}
             </label>
           </div>
@@ -70,7 +70,7 @@ export default class ClassTimingInfo extends Component {
               value={answers[1]}
               onChange={this._onIsWorkshopChange}
             />
-            <label className="label-radio3 contact3-form-text-answer fs-18 text-grey" for={'checkbox-' + answers[1]}>
+            <label className="label-radio3 contact3-form-text-answer fs-18 text-grey" htmlFor={'checkbox-' + answers[1]}>
               {answers[1]}
             </label>
           </div>

@@ -19,7 +19,7 @@ export default class  extends Component {
 
         <div className="wrap-contact3-form-radio">
           {answers.map((answer, index) => (
-            <div className="contact3-form-radio m-r-42">
+            <div className="contact3-form-radio m-r-42" key={index}>
               <input
                 className="input-radio3"
                 type="radio"
@@ -28,7 +28,7 @@ export default class  extends Component {
                 onChange={this._onRadioClick}
                 value={answer}
               />
-              <label className="label-radio3 contact3-form-text-answer fs-18" for={`radio-${questionTxt}-${index}`}>
+              <label className="label-radio3 contact3-form-text-answer fs-18" htmlFor={`radio-${questionTxt}-${index}`}>
                 {answer}
               </label>
             </div>

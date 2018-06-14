@@ -19,7 +19,7 @@ export default class CheckboxQuestion extends Component {
 
         <div className="wrap-contact3-form-radio m-r-42">
           {answers.map((answer, index) => (
-            <div className="contact3-form-radio m-r-42">
+            <div className="contact3-form-radio m-r-42" key={index}>
               <input
                 className="input-radio3"
                 type="checkbox"
@@ -27,7 +27,7 @@ export default class CheckboxQuestion extends Component {
                 value={answer}
                 onChange={this._onChange}
               />
-              <label className="label-radio3 contact3-form-text-answer fs-18" for={'checkbox-' + answer}>
+              <label className="label-radio3 contact3-form-text-answer fs-18" htmlFor={'checkbox-' + answer}>
                 {answer}
               </label>
             </div>

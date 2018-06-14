@@ -1,10 +1,26 @@
 const router = require('express').Router()
 const formEntryRepo = require('../domain/formEntryRepo')
 var json2xls = require('json2xls');
+var path = require('path')
+var multer = require('multer');
+var os = require('os');
+var home = os.homedir();
 
-router.post('/addEntry', async (req, res) => {
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, home+'/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + Math.round(Math.random()*1000) + path.extname(file.originalname)) //Appending extension
+  }
+})
+
+var upload = multer({ storage: storage });
+
+router.post('/addEntry',upload.single('file'), async (req, res) => {
   try {
-    const params = req.body
+    const params = await req.body
+    console.log(req.file)
     const entryCount = await formEntryRepo.getEntryCount()
     const newEntry = {
       id: entryCount.toString(),
