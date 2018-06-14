@@ -38,7 +38,7 @@ export default class BackgroundInfo extends Component {
 
         {this.state.hasExperience && <TextField
           placeholder={PersianDict['more info']}
-          handleChange={this._handleExperienceDetailsChange}
+          handleTxtChange={this._handleExperienceDetailsChange}
         />}
 
         <br/><br/>

@@ -20,6 +20,7 @@ module.exports = {
   'yes': 'بله',
   'no': 'خیر',
 
+  'enter your edu info': 'رشته و دانشگاه تحصیلی خود را بنویسید',
   'bachelor': 'کارشناسی',
   'master': 'کارشناسی ارشد',
   'phd': 'دکتری',

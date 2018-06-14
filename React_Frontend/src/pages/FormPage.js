@@ -22,7 +22,7 @@ export default class FormPage extends Component {
       email: '',
       nationalId: '',
       phoneNumber: '',
-      isUtStudent: false,
+      collegeEduStatus: 'NONE',
       isBachelor: false,
       isMaster: false,
       isPhd: false,
@@ -34,6 +34,7 @@ export default class FormPage extends Component {
       phdId: '',
       phdClass: '',
       phdInfo: '',
+      otherUnivInfo: '',
       areasOfInterest: [],
       areasOfInterestMoreInfo: '',
 
@@ -67,8 +68,12 @@ export default class FormPage extends Component {
     this.setState({phoneNumber: newValue})
   }
 
-  _handleIsUtStudentChange = (newValue) => {
-    this.setState({isUtStudent: newValue === 'بله'})
+  _handleCollegeEduStatusChange = (newValue) => {
+    if (newValue === PersianDict['yes']) {
+      this.setState({collegeEduStatus: 'UT'})
+    } else if (newValue === PersianDict['no']) {
+      this.setState({collegeEduStatus: 'OTHER'})
+    }
   }
 
   _handleStudyLevelCheckboxClick = (studyLevel, checkedState) => {
@@ -111,6 +116,10 @@ export default class FormPage extends Component {
 
   _handlePhdInfoChange = (newValue) => {
     this.setState({phdInfo: newValue})
+  }
+
+  _handleOtherUnivInfoChange = (newValue) => {
+    this.setState({otherUnivInfo: newValue})
   }
 
   _handleAreasOfInterestChange = (area, checked) => {
@@ -163,7 +172,7 @@ export default class FormPage extends Component {
   }
 
   render () {
-    const { isUtStudent, isBachelor, isMaster, isPhd } = this.state
+    const { collegeEduStatus, isBachelor, isMaster, isPhd } = this.state
     return (
       <div className="bg-contact3">
         <div className="container-contact3">
@@ -199,10 +208,10 @@ export default class FormPage extends Component {
               <RadioQuestion
                 questionTxt={QuestionInfo['are you from UT']['question']}
                 answers={QuestionInfo['are you from UT']['answers']}
-                handleRadioChange={this._handleIsUtStudentChange}
+                handleRadioChange={this._handleCollegeEduStatusChange}
               />
 
-              {this.state.isUtStudent && <CollegeEduInfo
+              {this.state.collegeEduStatus === 'UT' && <CollegeEduInfo
                 handleStudyLevelChange={this._handleStudyLevelCheckboxClick}
                 handleBachelorIdChange={this._handleBachelorIdChange}
                 handleBachelorClassChange={this._handleBachelorClassChange}
@@ -212,6 +221,11 @@ export default class FormPage extends Component {
                 handlePhdIdChange={this._handlePhdIdChange}
                 handlePhdClassChange={this._handlePhdClassChange}
                 handlePhdInfoChange={this._handlePhdInfoChange}
+              />}
+
+              {this.state.collegeEduStatus === 'OTHER' && <TextField
+                placeholder={PersianDict['enter your edu info']}
+                handleTxtChange={this._handleOtherUnivInfoChange}
               />}
 
               <br/><br/>

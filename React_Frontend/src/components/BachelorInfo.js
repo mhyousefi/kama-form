@@ -17,11 +17,11 @@ export default class BachelorInfo extends Component {
         <br/>
         <TextField
           placeholder={PersianDict['student id']}
-          handleChange={handleIdChange}
+          handleTxtChange={handleIdChange}
         />
         <TextField
           placeholder={PersianDict['class']}
-          handleChange={handleClassChange}
+          handleTxtChange={handleClassChange}
         />
       </div>
     )

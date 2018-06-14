@@ -17,15 +17,15 @@ export default class PhDInfo extends Component {
         <br/>
         <TextField
           placeholder={PersianDict['student id']}
-          handleChange={handleIdChange}
+          handleTxtChange={handleIdChange}
         />
         <TextField
           placeholder={PersianDict['class']}
-          handleChange={handleClassChange}
+          handleTxtChange={handleClassChange}
         />
         <TextField
           placeholder={PersianDict['more info']}
-          handleChange={handleInfoChange}
+          handleTxtChange={handleInfoChange}
         />
       </div>
     )
