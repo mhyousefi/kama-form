@@ -3,40 +3,57 @@ const formEntryRepo = require('../domain/formEntryRepo')
 
 router.post('/addEntry', async (req, res) => {
   try {
+    const params = req.body
+    const entryCount = await formEntryRepo.getEntryCount()
     const newEntry = {
-      id: 'newFormEntry.id',
-      firstName: 'newFormEntry.firstName',
-      lastName: 'newFormEntry.lastName',
-      nationalId: 'newFormEntry.nationalId',
-      phoneNumber: 'newFormEntry.phoneNumber',
-      email: 'newFormEntry.email',
+      id: entryCount.toString(),
+      firstName: params.firstName,
+      lastName: params.lastName,
+      nationalId: params.nationalId,
+      phoneNumber: params.phoneNumber,
+      email: params.email,
 
-      isUtStudent: true,
-      bachelorsId: 'newFormEntry.bachelorsId',
-      bachelorsClass: 'newFormEntry.bachelorsClass',
-      masterId: 'newFormEntry.masterId',
-      masterClass: 'newFormEntry.masterClass',
-      masterInfo: 'newFormEntry.masterInfo',
-      phdId: 'newFormEntry.phdId',
-      phdClass: 'newFormEntry.phdClass',
-      phdInfo: 'newFormEntry.phdInfo',
+      isUtStudent: params.isUtStudent,
+      bachelorsId: params.bachelorsId,
+      bachelorsClass: params.bachelorsClass,
+      masterId: params.masterId,
+      masterClass: params.masterClass,
+      masterInfo: params.masterInfo,
+      phdId: params.phdId,
+      phdClass: params.phdClass,
+      phdInfo: params.phdInfo,
 
-      areasOfInterest: JSON.stringify(['A', 'B']),
-      areasOfInterestMoreInfo: 'newFormEntry.areasOfInterestMoreInfo',
+      areasOfInterest: JSON.stringify(params.areasOfInterest),
+      areasOfInterestMoreInfo: params.areasOfInterestMoreInfo,
 
-      isWeekly: true,
-      weeklyHours: JSON.stringify(['11', '22']),
-      isWorkshop: true,
-      workshopDuration: 10,
+      isWeekly: params.isWeekly,
+      weeklyHours: JSON.stringify(params.weeklyHours),
+      isWorkshop: params.isWorkshop,
+      workshopDuration: params.workshopDuration,
     }
     await formEntryRepo.addFormEntry(newEntry)
-    res.send('YOU HAVE ADDED AN ENTRY')
+    res.send('House added successfully!')
   } catch (e) {}
 })
 
-router.get('/getFormEntryById', async (req, res) => {
-  let formEntry = await formEntryRepo.getFormEntryByID('newFormEntry.id')
-  res.send(JSON.stringify(formEntry))
+router.get('/getEntryById', async (req, res) => {
+  try {
+    const id = req.body.id
+    console.log(`id = ${id}`)
+    const formEntry = await formEntryRepo.getFormEntryByID(id)
+    if (formEntry) {
+      res.send(JSON.stringify(formEntry))
+    } else {}
+  } catch (e) {}
+})
+
+router.get('/getAllEntries', async (req, res) => {
+  try {
+    const entries = await formEntryRepo.getAllEntries()
+    if (entries) {
+      res.send(JSON.stringify(entries))
+    } else {}
+  } catch (e) {}
 })
 
 module.exports = router

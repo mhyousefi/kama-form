@@ -39,10 +39,13 @@ const addFormEntry = async (newFormEntry, errCallback) => {
 }
 
 const getFormEntryByID = async (id, errCallback) => {
+  console.log('11111111')
   return await FormEntries.findById(id).then(item => {
+    console.log('2222222')
     if (!item) errCallback(new Error('User was not found'))
     else {
       let retouchedItem = item
+      console.log(`retouchedItem = ${retouchedItem}`)
       retouchedItem.areasOfInterest = JSON.parse(retouchedItem.areasOfInterest)
       retouchedItem.weeklyHours = JSON.parse(retouchedItem.weeklyHours)
       return retouchedItem
@@ -50,5 +53,38 @@ const getFormEntryByID = async (id, errCallback) => {
   })
 }
 
+const getEntryCount = async (errCallback) => {
+  try {
+    return await FormEntries.findAndCountAll({where: {}}).then(results => {
+      if (!results) errCallback(new Error('Unable to search for homes'))
+      else return results.count
+    })
+  } catch (err) {
+    errCallback(new Error(err.message))
+  }
+}
+
+const getAllEntries = async (errCallback) => {
+  try {
+    return await FormEntries.findAndCountAll({where: {}}).then(results => {
+      if (!results) errCallback(new Error('Unable to search for homes'))
+      else {
+        const entries = results['rows']
+        let retouchedEntries = []
+        entries.forEach((item) => {
+          item.areasOfInterest = JSON.parse(item.areasOfInterest)
+          item.weeklyHours = JSON.parse(item.weeklyHours)
+          retouchedEntries.push(item)
+        })
+        return retouchedEntries
+      }
+    })
+  } catch (err) {
+    errCallback(new Error(err.message))
+  }
+}
+
 module.exports.addFormEntry = addFormEntry
 module.exports.getFormEntryByID = getFormEntryByID
+module.exports.getEntryCount = getEntryCount
+module.exports.getAllEntries = getAllEntries
