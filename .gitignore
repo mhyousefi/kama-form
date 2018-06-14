@@ -2,12 +2,15 @@
 
 # dependencies
 /React_Frontend/node_modules
+/Express_Backend/node_modules
 
 # testing
 /React_Frontend/coverage
+/Express_Backend/coverage
 
 # production
 /React_Frontend/build
+/Express_Backend/build
 
 # misc
 .DS_Store

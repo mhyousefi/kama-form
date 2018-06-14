@@ -1,0 +1,31 @@
+{
+  "name": "express_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node App.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhyousefi/kama-form.git"
+  },
+  "author": "mhyousefi <mhyousefi96@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhyousefi/kama-form/issues"
+  },
+  "homepage": "https://github.com/mhyousefi/kama-form#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "nodemon": "^1.17.5",
+    "npm": "^6.1.0",
+    "path": "^0.12.7",
+    "request": "^2.87.0",
+    "sequelize": "^4.37.10",
+    "sqlite3": "^4.0.0",
+    "process": "latest"
+  }
+}
