@@ -13,7 +13,7 @@ export default class CheckboxQuestion extends Component {
     const { questionTxt, answers } = this.props
     return (
       <div>
-        <span className="contact3-form-text-question">
+        <span className="contact3-form-text-question fs-24">
           {questionTxt}
         </span>
 
@@ -27,10 +27,9 @@ export default class CheckboxQuestion extends Component {
                 value={answer}
                 onChange={this._onChange}
               />
-              <label className="label-radio3 contact3-form-text-answer" for={"checkbox-" + answer}>
+              <label className="label-radio3 contact3-form-text-answer fs-18" for={"checkbox-" + answer}>
                 {answer}
               </label>
-              {/*{(index === 0 && this.props.x) && }*/}
             </div>
           </div>
         ))}

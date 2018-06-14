@@ -11,6 +11,7 @@ import BachelorInfo from '../components/BachelorInfo'
 import MasterInfo from '../components/MasterInfo'
 import PhDInfo from '../components/PhDInfo'
 import CollegeEduInfo from '../components/CollegeEduInfo'
+import BackgroundInfo from '../components/BackgroundInfo'
 
 export default class FormPage extends Component {
   constructor (props) {
@@ -34,6 +35,10 @@ export default class FormPage extends Component {
       phdClass: '',
       phdInfo: '',
       areasOfInterest: [],
+
+
+      hasExperience: false,
+      experienceDetail: '',
     }
   }
 
@@ -122,6 +127,14 @@ export default class FormPage extends Component {
     }
   }
 
+  _handleHasExperienceChange = (newValue) => {
+    this.setState({hasExperience: newValue})
+  }
+
+  _handleExperienceDetailChange = (newValue) => {
+    this.setState({experienceDetail: newValue})
+  }
+
   render () {
     const { isUtStudent, isBachelor, isMaster, isPhd } = this.state
     let x = (isUtStudent && isBachelor) ? <BachelorInfo
@@ -137,10 +150,6 @@ export default class FormPage extends Component {
                 {PersianDict['form title']}
               </span>
 
-              {this.state.areasOfInterest.map((elem, key) => (
-                <div>{elem}</div>
-              ))}
-
               <TextField
                 placeholder={PersianDict['first name']}
                 handleChange={this._handleFirstNameChange}
@@ -153,7 +162,8 @@ export default class FormPage extends Component {
                 placeholder={PersianDict['national code']}
                 handleChange={this._handleNationalIdChange}
               />
-              <br/>
+
+              <br/><br/>
 
               <RadioQuestion
                 questionTxt={QuestionInfo['are you from UT']['question']}
@@ -173,8 +183,6 @@ export default class FormPage extends Component {
                 handlePhdInfoChange={this._handlePhdInfoChange}
               />}
 
-              <br/><br/>
-
               <TextField
                 placeholder={PersianDict['phone number']}
                 handleChange={this._handlePhoneNumberChange}
@@ -183,7 +191,8 @@ export default class FormPage extends Component {
                 placeholder={PersianDict['email']}
                 handleChange={this._handleEmailChange}
               />
-              <br/>
+
+              <br/><br/><br/>
 
               <CheckboxQuestion
                 questionTxt={QuestionInfo['areas of interest']['question']}
@@ -191,15 +200,14 @@ export default class FormPage extends Component {
                 handleCheckboxChange={this._handleAreasOfInterestChange}
               />
 
-              <div className="wrap-input3 validate-input" data-validate="Message is required">
-                <textarea className="input3" name="message" placeholder="پیام شما"></textarea>
-                <span className="focus-input3"></span>
-              </div>
+              <br/><br/>
 
-              <label className="custom-file">
-                <input type="file" id="file" className="custom-file-input"/>
-                <span className="custom-file-control"></span>
-              </label>
+              <BackgroundInfo
+                handleHasExperienceChange={this._handleHasExperienceChange}
+                handleExperienceDetailChange={this._handleExperienceDetailChange}
+              />
+
+              <br/><br/>
 
               <div className="container-contact3-form-btn">
                 <button className="contact3-form-btn">

@@ -26,5 +26,9 @@ module.exports = {
       'عکاسی',
       'اسکیس و راندو',
     ]
+  },
+  'teaching experience': {
+    question: 'آیا سابقه تدریس دارید؟',
+    answers: ['بله', 'خیر']
   }
 }

@@ -13,7 +13,7 @@ export default class  extends Component {
     const {questionTxt, answers} = this.props
     return (
       <div>
-        <span className="contact3-form-text-question">
+        <span className="contact3-form-text-question fs-24">
           {questionTxt}
         </span>
 
@@ -23,12 +23,12 @@ export default class  extends Component {
               <input
                 className="input-radio3"
                 type="radio"
-                id={'radio-' + index}
+                id={`radio-${questionTxt}-${index}`}
                 name={'choice'}
                 onChange={this._onRadioClick}
                 value={answer}
               />
-              <label className="label-radio3 contact3-form-text-answer" for={'radio-' + index}>
+              <label className="label-radio3 contact3-form-text-answer fs-18" for={`radio-${questionTxt}-${index}`}>
                 {answer}
               </label>
             </div>

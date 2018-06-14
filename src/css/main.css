@@ -279,6 +279,14 @@ textarea.input3 {
   transition: all 0.4s;
 }
 
+.upload-btn {
+  display: flex;
+  padding: 4px;
+  height: 100px;
+  min-width: 120px;
+  border-radius: 2px;
+}
+
 .contact3-form-btn::before {
   content: "";
   display: block;
@@ -383,6 +391,9 @@ textarea.input3 {
   }
 }
 
+.rtl {
+  direction: rtl;
+}
 
 /*==================================================================
 [ Restyle Radio ]*/

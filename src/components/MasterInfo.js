@@ -14,6 +14,7 @@ export default class MasterInfo extends Component {
         <span className="contact3-form-text-question">
           {PersianDict['master info']}
         </span>
+        <br/>
         <TextField
           placeholder={PersianDict['student id']}
           handleChange={handleIdChange}

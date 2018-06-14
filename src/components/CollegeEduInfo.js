@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import QuestionInfo from '../utils/QuestionInfo'
 import BachelorInfo from './BachelorInfo'
 import MasterInfo from './MasterInfo'
+import PhDInfo from './PhDInfo'
 
 export default class CollegeEduInfo extends Component {
   constructor (props) {
@@ -98,7 +99,7 @@ export default class CollegeEduInfo extends Component {
             </label>
           </div>
 
-          {this.state.masterChecked && <MasterInfo
+          {this.state.phdChecked && <PhDInfo
             handleIdChange={handlePhdIdChange}
             handleClassChange={handlePhdClassChange}
             handleInfoChange={handlePhdInfoChange}
