@@ -84,13 +84,38 @@ router.post('/uploadFile', async (req, res) => {
 })
 
 router.get('/', async (req, res) => {
-
-  let data = [
-    {id: 1, name: 'sheetjs', value: 7262},
-    {id: 2, name: 'js-xlsx', value: 6969},
-  ]
-
-  res.xls('kama.xlsx', data)
+  let excelData = []
+  const entries = await formEntryRepo.getAllEntries()
+  entries.forEach((item) => {
+    let excelRow = {
+      id: item.id,
+      firstName: item.firstName,
+      lastName: item.lastName,
+      nationalId: item.nationalId,
+      email: item.email,
+      phoneNumber: item.phoneNumber,
+      isUtStudent: item.isUtStudent,
+      bachelorsId: item.bachelorsId,
+      bachelorsClass: item.bachelorsClass,
+      masterId: item.masterId,
+      masterClass: item.masterClass,
+      masterInfo: item.masterInfo,
+      phdId: item.phdId,
+      phdClass: item.phdClass,
+      phdInfo: item.phdInfo,
+      otherUnivInfo: item.otherUnivInfo,
+      areasOfInterest: item.areasOfInterest,
+      areasOfInterestMoreInfo: item.areasOfInterestMoreInfo,
+      isWeekly: item.isWeekly,
+      weeklyHours: item.weeklyHours,
+      isWorkshop: item.isWorkshop,
+      workshopDuration: item.workshopDuration,
+      hasExperience: item.hasExperience,
+      experienceDetail: item.experienceDetail,
+    }
+    excelData.push(excelRow)
+  })
+  res.xls('KAMA-form.xlsx', excelData)
 })
 
 module.exports = router
