@@ -71,6 +71,10 @@ export default class WeeklyHours extends Component {
   render () {
     return (
       <div>
+        <span className='contact3-form-text-question'>
+          {PersianDict['your available days']}
+        </span>
+
         <div className="wrap-contact3-form-radio m-r-42">
           <div className="contact3-form-radio m-r-42">
             <input

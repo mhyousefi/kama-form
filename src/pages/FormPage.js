@@ -35,6 +35,7 @@ export default class FormPage extends Component {
       phdClass: '',
       phdInfo: '',
       areasOfInterest: [],
+      areasOfInterestMoreInfo: '',
 
       isWeekly: false,
       weeklyHours: ['', '', '', '', '', ''],
@@ -131,6 +132,10 @@ export default class FormPage extends Component {
     }
   }
 
+  _handleAreasOfInterestMoreInfoChange = (newValue) => {
+    this.setState({areasOfInterestMoreInfo: newValue})
+  }
+
   _handleHasExperienceChange = (newValue) => {
     this.setState({hasExperience: newValue})
   }
@@ -170,15 +175,23 @@ export default class FormPage extends Component {
 
               <TextField
                 placeholder={PersianDict['first name']}
-                handleChange={this._handleFirstNameChange}
+                handleTxtChange={this._handleFirstNameChange}
               />
               <TextField
                 placeholder={PersianDict['last name']}
-                handleChange={this._handleLastNameChange}
+                handleTxtChange={this._handleLastNameChange}
               />
               <TextField
                 placeholder={PersianDict['national code']}
-                handleChange={this._handleNationalIdChange}
+                handleTxtChange={this._handleNationalIdChange}
+              />
+              <TextField
+                placeholder={PersianDict['phone number']}
+                handleTxtChange={this._handlePhoneNumberChange}
+              />
+              <TextField
+                placeholder={PersianDict['email']}
+                handleTxtChange={this._handleEmailChange}
               />
 
               <br/><br/>
@@ -201,21 +214,17 @@ export default class FormPage extends Component {
                 handlePhdInfoChange={this._handlePhdInfoChange}
               />}
 
-              <TextField
-                placeholder={PersianDict['phone number']}
-                handleChange={this._handlePhoneNumberChange}
-              />
-              <TextField
-                placeholder={PersianDict['email']}
-                handleChange={this._handleEmailChange}
-              />
-
-              <br/><br/><br/>
+              <br/><br/>
 
               <CheckboxQuestion
                 questionTxt={QuestionInfo['areas of interest']['question']}
                 answers={QuestionInfo['areas of interest']['answers']}
                 handleCheckboxChange={this._handleAreasOfInterestChange}
+              />
+
+              <TextField
+                placeholder={PersianDict['more info']}
+                handleTxtChange={this._handleAreasOfInterestMoreInfoChange}
               />
 
               <br/><br/>

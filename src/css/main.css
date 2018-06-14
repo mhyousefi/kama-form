@@ -250,7 +250,7 @@ textarea.input3 {
 .contact3-form-btn {
   font-family: Poppins-Medium;
   font-size: 16px;
-  color: #555555;
+  color: white;
   line-height: 1.2;
   text-transform: uppercase;
 
@@ -264,10 +264,10 @@ textarea.input3 {
   padding: 0 15px;
   min-width: 120px;
   height: 50px;
-  border-radius: 2px;
+  border-radius: 5px;
   position: relative;
   z-index: 1;
-  background: #127264;
+  background-color: #127264;
   /*background: -webkit-linear-gradient(-135deg, #56ab2f, #a8e063);*/
   /*background: -o-linear-gradient(-135deg, #56ab2f, #a8e063);*/
   /*background: -moz-linear-gradient(-135deg, #56ab2f, #a8e063);*/
@@ -297,7 +297,7 @@ textarea.input3 {
   height: 100%;
   top: 0;
   left: 0;
-  background: #fff;
+  background: #127264;
   opacity: 1;
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
@@ -306,12 +306,12 @@ textarea.input3 {
 }
 
 .contact3-form-btn:hover {
-  color: #fff;
+  color: #cbcbcb;
 }
 
-.contact3-form-btn:hover:before {
-  opacity: 0;
-}
+/*.contact3-form-btn:hover:before {*/
+  /*opacity: 0;*/
+/*}*/
 
 /*------------------------------------------------------------------
 [ Responsive ]*/

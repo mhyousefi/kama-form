@@ -56,19 +56,19 @@ export default class BackgroundInfo extends Component {
 
         <br/><br/>
 
-        <span className='contact3-form-text-question fs-20 text-right'>
+        <span className='contact3-form-text-question fs-22 text-right text-dark-green'>
           {PersianDict['file should include']}
         </span>
 
         <br/>
 
-        <span className='contact3-form-text-answer fs-16 rtl m-r-20'>
+        <span className='contact3-form-text-answer fs-18 rtl m-r-20 text-black'>
           {PersianDict['specs description']}
         </span>
 
         <br/>
 
-        <span className='contact3-form-text-answer fs-16 rtl m-r-20'>
+        <span className='contact3-form-text-answer fs-18 rtl m-r-20 text-black'>
           {PersianDict['background description']}
         </span>
       </div>

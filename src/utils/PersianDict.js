@@ -28,6 +28,7 @@ module.exports = {
   'workshop': 'فشرده-کارگاه',
 
   'workshop duration': 'مدت کارگاه',
+  'your available days': 'روزهای مقدور شما برای تشکیل کلاس',
   'hours available': 'ساعات مناسب شما در این روز',
 
   'saturday': 'شنبه',
