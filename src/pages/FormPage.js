@@ -159,10 +159,6 @@ export default class FormPage extends Component {
 
   render () {
     const { isUtStudent, isBachelor, isMaster, isPhd } = this.state
-    let x = (isUtStudent && isBachelor) ? <BachelorInfo
-      handleIdChange={this._handleBachelorsIdChange}
-      handleClassChange={this._handleBachelorsClassChange}
-    /> : <div/>
     return (
       <div className="bg-contact3">
         <div className="container-contact3">
@@ -242,7 +238,7 @@ export default class FormPage extends Component {
 
               <div className="container-contact3-form-btn">
                 <button className="contact3-form-btn">
-                  Submit
+                  {PersianDict['send info']}
                 </button>
               </div>
             </form>

@@ -267,11 +267,11 @@ textarea.input3 {
   border-radius: 2px;
   position: relative;
   z-index: 1;
-  background: #80c64a;
-  background: -webkit-linear-gradient(-135deg, #56ab2f, #a8e063);
-  background: -o-linear-gradient(-135deg, #56ab2f, #a8e063);
-  background: -moz-linear-gradient(-135deg, #56ab2f, #a8e063);
-  background: linear-gradient(-135deg, #56ab2f, #a8e063);
+  background: #127264;
+  /*background: -webkit-linear-gradient(-135deg, #56ab2f, #a8e063);*/
+  /*background: -o-linear-gradient(-135deg, #56ab2f, #a8e063);*/
+  /*background: -moz-linear-gradient(-135deg, #56ab2f, #a8e063);*/
+  /*background: linear-gradient(-135deg, #56ab2f, #a8e063);*/
 
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
