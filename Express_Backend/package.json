@@ -23,9 +23,9 @@
     "nodemon": "^1.17.5",
     "npm": "^6.1.0",
     "path": "^0.12.7",
+    "process": "latest",
     "request": "^2.87.0",
     "sequelize": "^4.37.10",
-    "sqlite3": "^4.0.0",
-    "process": "latest"
+    "sqlite3": "^4.0.0"
   }
 }
