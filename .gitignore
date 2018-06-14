@@ -1,13 +1,13 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+/React_Frontend/node_modules
 
 # testing
-/coverage
+/React_Frontend/coverage
 
 # production
-/build
+/React_Frontend/build
 
 # misc
 .DS_Store
