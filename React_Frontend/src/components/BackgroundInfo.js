@@ -50,7 +50,7 @@ export default class BackgroundInfo extends Component {
         <br/>
 
         <label className="custom-file">
-          <input type="file" id="file" className="custom-file-input"/>
+          <input type="file" className="custom-file-input" id="resumeFile"/>
           <span className="custom-file-control"></span>
         </label>
 

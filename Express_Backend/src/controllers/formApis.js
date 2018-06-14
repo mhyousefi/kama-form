@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const formEntryRepo = require('../domain/formEntryRepo')
+const XLSX = require('xlsx')
 
 router.post('/addEntry', async (req, res) => {
   try {
@@ -32,8 +33,10 @@ router.post('/addEntry', async (req, res) => {
       workshopDuration: params.workshopDuration,
     }
     await formEntryRepo.addFormEntry(newEntry)
-    res.send('House added successfully!')
-  } catch (e) {}
+    res.send(JSON.stringify({status: 'OK'}))
+  } catch (e) {
+    res.send(JSON.stringify({status: 'ERROR'}))
+  }
 })
 
 router.get('/getEntryById', async (req, res) => {
@@ -53,6 +56,41 @@ router.get('/getAllEntries', async (req, res) => {
     if (entries) {
       res.send(JSON.stringify(entries))
     } else {}
+  } catch (e) {}
+})
+
+router.post('/uploadFile', async (req, res) => {
+  try {
+    const rrr = req
+    console.log(`REQUEST BODY IS =====> ${JSON.stringify(rrr)}`)
+    res.send(JSON.stringify({status: 'OK'}))
+  } catch (e) {}
+})
+
+router.get('/', async (req, res) => {
+
+  try {
+    let data = [
+      ['id', 'name', 'value'],
+      [1, 'sheetjs', 7262],
+      [2, 'js-xlsx', 6969],
+    ]
+
+    const entries = await formEntryRepo.getAllEntries()
+    console.log(`entries[0] = ${JSON.stringify(entries[0])}`)
+
+
+    // let workbook = XLSX.utils.book_new()
+    // workbook.Props = {
+    //   Title: 'Form Data',
+    // }
+    // workbook.SheetNames.push('form entries')
+    // workbook.Sheets['Form sheet'] = XLSX.utils.aoa_to_sheet(data.data)
+
+    let fileName = 'form_data.xlsx'
+    // res.setHeader('Content-disposition', 'attachment; filename=' + fileName)
+    // res.setHeader('Content-type', 'application/xlsx')
+    res.send('workbook')
   } catch (e) {}
 })
 

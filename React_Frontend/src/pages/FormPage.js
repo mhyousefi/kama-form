@@ -4,11 +4,10 @@ import PersianDict from '../utils/PersianDict'
 import QuestionInfo from '../utils/QuestionInfo'
 import RadioQuestion from '../components/RadioQuestion'
 import CheckboxQuestion from '../components/CheckboxQuestion'
-import BachelorInfo from '../components/BachelorInfo'
 import CollegeEduInfo from '../components/CollegeEduInfo'
 import BackgroundInfo from '../components/BackgroundInfo'
 import ClassTimingInfo from '../components/ClassTimingInfo'
-
+import { addFormEntryApi, uploadFile } from '../api/FormEntryApis'
 import '../css/main.css'
 import '../css/texts.css'
 import '../css/util.css'
@@ -22,6 +21,7 @@ export default class FormPage extends Component {
       email: '',
       nationalId: '',
       phoneNumber: '',
+
       collegeEduStatus: 'NONE',
       isBachelor: false,
       isMaster: false,
@@ -34,6 +34,7 @@ export default class FormPage extends Component {
       phdId: '',
       phdClass: '',
       phdInfo: '',
+
       otherUnivInfo: '',
       areasOfInterest: [],
       areasOfInterestMoreInfo: '',
@@ -45,7 +46,67 @@ export default class FormPage extends Component {
 
       hasExperience: false,
       experienceDetail: '',
+
+      submissionStatus: 'NOT_SUBMITTED',
     }
+  }
+
+  _sendFormData = (event) => {
+    event.preventDefault()
+
+    let fileUploaded = false
+
+    let resumeFileInput = document.getElementById('resumeFile')
+    let resume = resumeFileInput.files[0]
+    uploadFile(resume).then((response) => {
+      fileUploaded = response
+    })
+
+    // let newEntry = {
+    //   firstName: this.state.firstName,
+    //   lastName: this.state.lastName,
+    //   email: this.state.email,
+    //   nationalId: this.state.nationalId,
+    //   phoneNumber: this.state.phoneNumber,
+    //
+    //   isUtStudent: this.state.collegeEduStatus === 'UT',
+    //   bachelorsId: this.state.bachelorsId,
+    //   bachelorsClass: this.state.bachelorsClass,
+    //   masterId: this.state.masterId,
+    //   masterClass: this.state.masterClass,
+    //   masterInfo: this.state.masterInfo,
+    //   phdId: this.state.phdId,
+    //   phdClass: this.state.phdClass,
+    //   phdInfo: this.state.phdInfo,
+    //   otherUnivInfo: this.state.otherUnivInfo,
+    //
+    //   areasOfInterest: this.state.areasOfInterest,
+    //   areasOfInterestMoreInfo: this.state.areasOfInterestMoreInfo,
+    //
+    //   isWeekly: this.state.isWeekly,
+    //   weeklyHours: this.state.weeklyHours,
+    //   isWorkshop: this.state.isWorkshop,
+    //   workshopDuration: this.state.workshopDuration,
+    //
+    //   hasExperience: this.state.hasExperience,
+    //   experienceDetail: this.state.experienceDetail,
+    // }
+    //
+    // addFormEntryApi(newEntry).then((response) => {
+    //   if (response === true && fileUploadStatus === true) {
+    //     this._successfulSubmit()
+    //   } else {
+    //     this._failedSubmit()
+    //   }
+    // })
+  }
+
+  _successfulSubmit = () => {
+    this.setState({submissionStatus: 'SUCCESS'})
+  }
+
+  _failedSubmit = () => {
+    this.setState({submissionStatus: 'FAIL'})
   }
 
   _handleFirstNameChange = (newValue) => {
@@ -171,8 +232,11 @@ export default class FormPage extends Component {
     this.setState({weeklyHours: newWeeklyHours})
   }
 
+  // _handleFileUpload = (file) => {
+  //   this.setState({resume: file})
+  // }
+
   render () {
-    const { collegeEduStatus, isBachelor, isMaster, isPhd } = this.state
     return (
       <div className="bg-contact3">
         <div className="container-contact3">
@@ -255,15 +319,20 @@ export default class FormPage extends Component {
               <BackgroundInfo
                 handleHasExperienceChange={this._handleHasExperienceChange}
                 handleExperienceDetailChange={this._handleExperienceDetailChange}
+                handleFileUpload={this._handleFileUpload}
               />
 
               <br/><br/>
 
               <div className="container-contact3-form-btn">
-                <button className="contact3-form-btn">
+                <button className="contact3-form-btn" onClick={this._sendFormData}>
                   {PersianDict['send info']}
                 </button>
               </div>
+
+              {this.state.submissionStatus === 'SUCCESS' && <div>OK SUBMISSION</div>}
+              {this.state.submissionStatus === 'FAIL' && <div>FAIL SUBMISSION</div>}
+              {this.state.submissionStatus === 'NOT_SUBMITTED' && <div>NOT SUBMITTED</div>}
             </form>
           </div>
         </div>

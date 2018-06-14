@@ -26,6 +26,7 @@
     "process": "latest",
     "request": "^2.87.0",
     "sequelize": "^4.37.10",
-    "sqlite3": "^4.0.0"
+    "sqlite3": "^4.0.0",
+    "xlsx": "^0.13.0"
   }
 }
