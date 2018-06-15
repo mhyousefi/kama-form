@@ -72,7 +72,7 @@ export default class FormPage extends Component {
     } if (collegeEduStatus === 'OTHER' && otherUnivInfo === '') {
       status = false
       console.log('2')
-    } else if (collegeEduStatus === 'UT') {
+    } else if (collegeEduStatus === 'UT' && areasOfInterestMoreInfo === '') {
       if (!isBachelor && !isMaster && !isPhd) {
         status = false
         console.log('3')
