@@ -13,7 +13,7 @@ export const parseJSON = (response) => {
 }
 
 export const apiUrls = {
-  'addEntry': 'http://paymon.ir:3001/api/addEntry',
-  'getEntryById': 'http://paymon.ir:3001/api/getEntryById',
-  'getAllEntries': 'http://paymon.ir:3001/api/getAllEntries',
+  'addEntry': 'http://localhost:3001/api/addEntry',
+  'getEntryById': 'http://localhost:3001/api/getEntryById',
+  'getAllEntries': 'http://localhost:3001/api/getAllEntries',
 }

@@ -19,6 +19,7 @@ export const addFormEntryApi = async (newEntry, file) => {
     phdId: newEntry.phdId,
     phdClass: newEntry.phdClass,
     phdInfo: newEntry.phdInfo,
+    otherUnivInfo: newEntry.otherUnivInfo,
 
     areasOfInterest: JSON.stringify(newEntry.areasOfInterest),
     areasOfInterestMoreInfo: newEntry.areasOfInterestMoreInfo,

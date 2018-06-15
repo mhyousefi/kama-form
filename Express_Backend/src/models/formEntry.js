@@ -35,4 +35,5 @@ module.exports = sequelizeDb.define('FormEntries', {
 
   hasExperience: Sequelize.BOOLEAN,
   experienceDetail: Sequelize.STRING,
+  resumeFilename: Sequelize.STRING,
 })

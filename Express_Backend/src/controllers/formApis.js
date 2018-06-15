@@ -27,10 +27,7 @@ zipFolderPromise = function (x, y) {
 router.post('/addEntry',upload.single('file'), async (req, res) => {
   try {
     let params = await req.body
-    console.log(params)
-    console.log(params.formData)
-    // params = JSON.parse(params.formData)
-    // const fileName = req.file.filename
+    params = JSON.parse(params.formData)
     const entryCount = await formEntryRepo.getEntryCount()
     const newEntry = {
       id: entryCount.toString(),
@@ -49,6 +46,7 @@ router.post('/addEntry',upload.single('file'), async (req, res) => {
       phdId: params.phdId,
       phdClass: params.phdClass,
       phdInfo: params.phdInfo,
+      otherUnivInfo: params.otherUnivInfo,
 
       areasOfInterest: JSON.stringify(params.areasOfInterest),
       areasOfInterestMoreInfo: params.areasOfInterestMoreInfo,
@@ -57,7 +55,7 @@ router.post('/addEntry',upload.single('file'), async (req, res) => {
       weeklyHours: JSON.stringify(params.weeklyHours),
       isWorkshop: params.isWorkshop,
       workshopDuration: params.workshopDuration,
-      // resumeFilename: fileName,
+      resumeFilename: req.file.filename,
     }
     await formEntryRepo.addFormEntry(newEntry)
     res.send(JSON.stringify({status: 'OK'}))
@@ -82,10 +80,6 @@ router.get('/getAllEntries', async (req, res) => {
   try {
     const entries = await formEntryRepo.getAllEntries()
     if (entries) {
-      // entries.forEach((item) => {
-      //   item.areasOfInterest = JSON.parse(item.areasOfInterest)
-      //   item.weeklyHours = JSON.parse(item.weeklyHours)
-      // })
       res.send(JSON.stringify(entries))
     } else {}
   } catch (e) {}
@@ -104,35 +98,40 @@ router.get('/kama-93-summer-private/getAllResults', async (req, res) => {
   entries.forEach((item) => {
     let excelRow = {
       id: item.id,
-      'نام': item.firstName,
-      'نام خانوادگی': item.lastName,
-      'کد ملی': item.nationalId,
-      'ایمیل': item.email,
-      'شماره تلفن': item.phoneNumber,
+      'نام': item.firstName || "",
+      'نام خانوادگی': item.lastName || "",
+      'کد ملی': item.nationalId || "",
+      'ایمیل': item.email || "",
+      'شماره تلفن': item.phoneNumber || "",
 
-      'دانشجوی دانشگاه تهران؟': item.isUtStudent,
-      'شماره دانشجویی کارشناسی': item.bachelorsId,
-      'سال ورودی کارشناسی': item.bachelorsClass,
-      'شماره دانشجویی کارشناسی ارشد': item.masterId,
-      'سال ورودی کارشناسی ارشد': item.masterClass,
-      'جزئیات کارشناسی ارشد': item.masterInfo,
-      'شماره دانشجویی دکتری': item.phdId,
-      'سال ورودی دکتری': item.phdClass,
-      'جزئیات دکتری': item.phdInfo,
+      'دانشجوی دانشگاه تهران؟': item.isUtStudent || false,
+      'شماره دانشجویی کارشناسی': item.bachelorsId || "",
+      'سال ورودی کارشناسی': item.bachelorsClass || "",
+      'شماره دانشجویی کارشناسی ارشد': item.masterId || "",
+      'سال ورودی کارشناسی ارشد': item.masterClass || "",
+      'جزئیات کارشناسی ارشد': item.masterInfo || "",
+      'شماره دانشجویی دکتری': item.phdId || "",
+      'سال ورودی دکتری': item.phdClass || "",
+      'جزئیات دکتری': item.phdInfo || "",
       'اطلاعات دانشگاه دیگر': item.otherUnivInfo,
-      'حوزه های مورد علاقه': item.areasOfInterest,
-      'جزئیات': item.areasOfInterestMoreInfo,
-      'کلاس های هفتگی': item.isWeekly,
-      'شنبه': item.weeklyHours[0],
-      'یک شنبه': item.weeklyHours[1],
-      'دو شنبه': item.weeklyHours[2],
-      'سه شنبه': item.weeklyHours[3],
-      'چهار شنبه': item.weeklyHours[4],
-      'پنج شنبه': item.weeklyHours[5],
-      'فشرده - کارگاهی': item.isWorkshop,
-      'مدت کارگاه': item.workshopDuration,
-      'تجربه تدریس؟': item.hasExperience,
-      'جزئیات تدریس': item.experienceDetail,
+
+      'حوزه های مورد علاقه': item.areasOfInterest || "",
+      'جزئیات': item.areasOfInterestMoreInfo || "",
+
+      'کلاس های هفتگی': item.isWeekly || false,
+      'شنبه': JSON.parse(item.weeklyHours)[0],
+      'یک شنبه': JSON.parse(item.weeklyHours)[1],
+      'دو شنبه': JSON.parse(item.weeklyHours)[2],
+      'سه شنبه': JSON.parse(item.weeklyHours)[3],
+      'چهار شنبه': JSON.parse(item.weeklyHours)[4],
+      'پنج شنبه': JSON.parse(item.weeklyHours)[5],
+
+      'فشرده - کارگاهی': item.isWorkshop || false,
+      'مدت کارگاه': item.workshopDuration || "",
+
+      'تجربه تدریس؟': item.hasExperience || false,
+      'جزئیات تدریس': item.experienceDetail || "",
+      'اسم فایل رزومه': item.resumeFilename,
     }
     excelData.push(excelRow)
   })

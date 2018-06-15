@@ -21,6 +21,7 @@ const addFormEntry = async (newFormEntry, errCallback) => {
       phdId: newFormEntry.phdId,
       phdClass: newFormEntry.phdClass,
       phdInfo: newFormEntry.phdInfo,
+      otherUnivInfo: newFormEntry.otherUnivInfo,
 
       areasOfInterest: newFormEntry.areasOfInterest,
       areasOfInterestMoreInfo: newFormEntry.areasOfInterestMoreInfo,
@@ -29,6 +30,7 @@ const addFormEntry = async (newFormEntry, errCallback) => {
       weeklyHours: newFormEntry.weeklyHours,
       isWorkshop: newFormEntry.isWorkshop,
       workshopDuration: newFormEntry.workshopDuration,
+      resumeFilename: newFormEntry.resumeFilename,
     }).then(home => {
       if (!home) errCallback(new Error('Could not add home'))
       else return home
@@ -39,13 +41,10 @@ const addFormEntry = async (newFormEntry, errCallback) => {
 }
 
 const getFormEntryByID = async (id, errCallback) => {
-  console.log('11111111')
   return await FormEntries.findById(id).then(item => {
-    console.log('2222222')
     if (!item) errCallback(new Error('User was not found'))
     else {
       let retouchedItem = item
-      console.log(`retouchedItem = ${retouchedItem}`)
       retouchedItem.areasOfInterest = JSON.parse(retouchedItem.areasOfInterest)
       retouchedItem.weeklyHours = JSON.parse(retouchedItem.weeklyHours)
       return retouchedItem
