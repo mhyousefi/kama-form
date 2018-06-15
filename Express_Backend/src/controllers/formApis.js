@@ -27,8 +27,10 @@ zipFolderPromise = function (x, y) {
 router.post('/addEntry',upload.single('file'), async (req, res) => {
   try {
     let params = await req.body
-    params = JSON.parse(params.formData)
-    const fileName = req.file.filename
+    console.log(params)
+    console.log(params.formData)
+    // params = JSON.parse(params.formData)
+    // const fileName = req.file.filename
     const entryCount = await formEntryRepo.getEntryCount()
     const newEntry = {
       id: entryCount.toString(),
@@ -55,7 +57,7 @@ router.post('/addEntry',upload.single('file'), async (req, res) => {
       weeklyHours: JSON.stringify(params.weeklyHours),
       isWorkshop: params.isWorkshop,
       workshopDuration: params.workshopDuration,
-      resumeFilename: fileName,
+      // resumeFilename: fileName,
     }
     await formEntryRepo.addFormEntry(newEntry)
     res.send(JSON.stringify({status: 'OK'}))
@@ -80,6 +82,10 @@ router.get('/getAllEntries', async (req, res) => {
   try {
     const entries = await formEntryRepo.getAllEntries()
     if (entries) {
+      // entries.forEach((item) => {
+      //   item.areasOfInterest = JSON.parse(item.areasOfInterest)
+      //   item.weeklyHours = JSON.parse(item.weeklyHours)
+      // })
       res.send(JSON.stringify(entries))
     } else {}
   } catch (e) {}
@@ -103,6 +109,7 @@ router.get('/kama-93-summer-private/getAllResults', async (req, res) => {
       'کد ملی': item.nationalId,
       'ایمیل': item.email,
       'شماره تلفن': item.phoneNumber,
+
       'دانشجوی دانشگاه تهران؟': item.isUtStudent,
       'شماره دانشجویی کارشناسی': item.bachelorsId,
       'سال ورودی کارشناسی': item.bachelorsClass,
