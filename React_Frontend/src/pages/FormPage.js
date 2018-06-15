@@ -190,7 +190,6 @@ export default class FormPage extends Component {
     addFormEntryApi(newEntry, resume).then((response) => {
       if (response === true) {
         this._successfulSubmit()
-        window.location.reload()
       } else {
         this._failedSubmit()
       }
@@ -199,7 +198,7 @@ export default class FormPage extends Component {
 
   _successfulSubmit = () => {
     this.setState({submissionStatus: 'SUCCESS'})
-    alert(PersianDict['success msg'])
+    // alert(PersianDict['success msg'])
   }
 
   _invalidSubmit = () => {
@@ -337,101 +336,114 @@ export default class FormPage extends Component {
 
 
   render () {
-    return (
-      <div className="bg-contact3">
-        <div className="container-contact3">
-          <div className="wrap-contact3">
-            <form className="contact3-form validate-form">
-              <span className="contact3-form-text-title">
-                {PersianDict['form title']}
-              </span>
-
-              <TextField
-                placeholder={PersianDict['first name']}
-                handleTxtChange={this._handleFirstNameChange}
-              />
-              <TextField
-                placeholder={PersianDict['last name']}
-                handleTxtChange={this._handleLastNameChange}
-              />
-              <TextField
-                placeholder={PersianDict['national code']}
-                handleTxtChange={this._handleNationalIdChange}
-              />
-              <TextField
-                placeholder={PersianDict['phone number']}
-                handleTxtChange={this._handlePhoneNumberChange}
-              />
-              <TextField
-                placeholder={PersianDict['email']}
-                handleTxtChange={this._handleEmailChange}
-              />
-
-              <br/><br/>
-
-              <RadioQuestion
-                questionTxt={QuestionInfo['are you from UT']['question']}
-                answers={QuestionInfo['are you from UT']['answers']}
-                handleRadioChange={this._handleCollegeEduStatusChange}
-              />
-
-              {this.state.collegeEduStatus === 'UT' && <CollegeEduInfo
-                handleStudyLevelChange={this._handleStudyLevelCheckboxClick}
-                handleBachelorIdChange={this._handleBachelorIdChange}
-                handleBachelorClassChange={this._handleBachelorClassChange}
-                handleMasterIdChange={this._handleMasterIdChange}
-                handleMasterClassChange={this._handleMasterClassChange}
-                handleMasterInfoChange={this._handleMasterInfoChange}
-                handlePhdIdChange={this._handlePhdIdChange}
-                handlePhdClassChange={this._handlePhdClassChange}
-                handlePhdInfoChange={this._handlePhdInfoChange}
-              />}
-
-              {this.state.collegeEduStatus === 'OTHER' && <TextField
-                placeholder={PersianDict['enter your edu info']}
-                handleTxtChange={this._handleOtherUnivInfoChange}
-              />}
-
-              <br/><br/>
-
-              <CheckboxQuestion
-                questionTxt={QuestionInfo['areas of interest']['question']}
-                answers={QuestionInfo['areas of interest']['answers']}
-                handleCheckboxChange={this._handleAreasOfInterestChange}
-              />
-
-              <TextField
-                placeholder={PersianDict['more info']}
-                handleTxtChange={this._handleAreasOfInterestMoreInfoChange}
-              />
-
-              <br/><br/>
-
-              <ClassTimingInfo
-                handleIsWeeklyChange={this._handleIsWeeklyChange}
-                handleIsWorkshopChange={this._handleIsWorkshopChange}
-                handleWorkshopDurationChange={this._handleWorkshopDurationChange}
-                handleWeeklyHoursChange={this._handleWeeklyHoursChange}
-              />
-
-              <br/><br/>
-
-              <BackgroundInfo
-                handleHasExperienceChange={this._handleHasExperienceChange}
-                handleExperienceDetailChange={this._handleExperienceDetailChange}
-              />
-
-              <br/><br/>
-
-              <div className="container-contact3-form-btn">
-                <button className="contact3-form-btn" onClick={this._sendFormData}>
-                  {PersianDict['send info']}
-                </button>
-              </div>
-            </form>
+    console.log(this.state.submissionStatus)
+    if (this.state.submissionStatus === 'SUCCESS') {
+      return (
+        <div className="bg-contact3">
+          <div className="container-contact3">
+            <div className="wrap-contact3 rtl">
+              {PersianDict['success msg']}
+            </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div className="bg-contact3">
+          <div className="container-contact3">
+            <div className="wrap-contact3">
+              <form className="contact3-form validate-form">
+                <span className="contact3-form-text-title">
+                  {PersianDict['form title']}
+                </span>
+
+                <TextField
+                  placeholder={PersianDict['first name']}
+                  handleTxtChange={this._handleFirstNameChange}
+                />
+                <TextField
+                  placeholder={PersianDict['last name']}
+                  handleTxtChange={this._handleLastNameChange}
+                />
+                <TextField
+                  placeholder={PersianDict['national code']}
+                  handleTxtChange={this._handleNationalIdChange}
+                />
+                <TextField
+                  placeholder={PersianDict['phone number']}
+                  handleTxtChange={this._handlePhoneNumberChange}
+                />
+                <TextField
+                  placeholder={PersianDict['email']}
+                  handleTxtChange={this._handleEmailChange}
+                />
+
+                <br/><br/>
+
+                <RadioQuestion
+                  questionTxt={QuestionInfo['are you from UT']['question']}
+                  answers={QuestionInfo['are you from UT']['answers']}
+                  handleRadioChange={this._handleCollegeEduStatusChange}
+                />
+
+                {this.state.collegeEduStatus === 'UT' && <CollegeEduInfo
+                  handleStudyLevelChange={this._handleStudyLevelCheckboxClick}
+                  handleBachelorIdChange={this._handleBachelorIdChange}
+                  handleBachelorClassChange={this._handleBachelorClassChange}
+                  handleMasterIdChange={this._handleMasterIdChange}
+                  handleMasterClassChange={this._handleMasterClassChange}
+                  handleMasterInfoChange={this._handleMasterInfoChange}
+                  handlePhdIdChange={this._handlePhdIdChange}
+                  handlePhdClassChange={this._handlePhdClassChange}
+                  handlePhdInfoChange={this._handlePhdInfoChange}
+                />}
+
+                {this.state.collegeEduStatus === 'OTHER' && <TextField
+                  placeholder={PersianDict['enter your edu info']}
+                  handleTxtChange={this._handleOtherUnivInfoChange}
+                />}
+
+                <br/><br/>
+
+                <CheckboxQuestion
+                  questionTxt={QuestionInfo['areas of interest']['question']}
+                  answers={QuestionInfo['areas of interest']['answers']}
+                  handleCheckboxChange={this._handleAreasOfInterestChange}
+                />
+
+                <TextField
+                  placeholder={PersianDict['more info']}
+                  handleTxtChange={this._handleAreasOfInterestMoreInfoChange}
+                />
+
+                <br/><br/>
+
+                <ClassTimingInfo
+                  handleIsWeeklyChange={this._handleIsWeeklyChange}
+                  handleIsWorkshopChange={this._handleIsWorkshopChange}
+                  handleWorkshopDurationChange={this._handleWorkshopDurationChange}
+                  handleWeeklyHoursChange={this._handleWeeklyHoursChange}
+                />
+
+                <br/><br/>
+
+                <BackgroundInfo
+                  handleHasExperienceChange={this._handleHasExperienceChange}
+                  handleExperienceDetailChange={this._handleExperienceDetailChange}
+                />
+
+                <br/><br/>
+
+                <div className="container-contact3-form-btn">
+                  <button className="contact3-form-btn" onClick={this._sendFormData}>
+                    {PersianDict['send info']}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )
+    }
   }
 }
