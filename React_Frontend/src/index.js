@@ -4,7 +4,7 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom'
 import registerServiceWorker from './registerServiceWorker';
 
-const rootEl = document.getElementById('root')
+const rootEl = document.getElementById('randomID454545')
 
 ReactDOM.render(
   <BrowserRouter>
