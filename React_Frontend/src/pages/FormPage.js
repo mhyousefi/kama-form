@@ -342,7 +342,8 @@ export default class FormPage extends Component {
         <div className="bg-contact3">
           <div className="container-contact3">
             <div className="wrap-contact3 rtl">
-              {PersianDict['success msg']}
+              <div className="contact3-form-text-question f-s-24">{PersianDict['success msg_line1']}</div>
+              <div className="contact3-form-text-question f-s-24">{PersianDict['success msg_line2']}</div>
             </div>
           </div>
         </div>
@@ -439,6 +440,10 @@ export default class FormPage extends Component {
                     {PersianDict['send info']}
                   </button>
                 </div>
+
+                <span className="contact3-form-text-answer rtl">
+                  {PersianDict['please wait']}
+                </span>
               </form>
             </div>
           </div>
