@@ -55,7 +55,7 @@ export default class FormPage extends Component {
     const { firstName, lastName, email, nationalId, phoneNumber,
             collegeEduStatus, otherUnivInfo, isBachelor, isMaster, isPhd,
             bachelorsId, bachelorsClass, masterId, masterClass, masterInfo, phdId, phdClass, phdInfo,
-            areasOfInterest,
+            areasOfInterest, areasOfInterestMoreInfo,
             isWeekly, weeklyHours, isWorkshop, workshopDuration,
             hasExperience, experienceDetail } = this.state
 
@@ -100,7 +100,7 @@ export default class FormPage extends Component {
       }
     }
 
-    if (areasOfInterest.length === 0) {
+    if (areasOfInterest.length === 0 && areasOfInterestMoreInfo === '') {
       console.log('areasOfInterest.length === 0')
       status = false
     }
