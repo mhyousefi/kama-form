@@ -16,5 +16,4 @@ export const apiUrls = {
   'addEntry': 'http://localhost:3001/api/addEntry',
   'getEntryById': 'http://localhost:3001/api/getEntryById',
   'getAllEntries': 'http://localhost:3001/api/getAllEntries',
-  'uploadFile': 'http://localhost:3001/api/uploadFile'
 }

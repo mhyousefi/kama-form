@@ -51,10 +51,108 @@ export default class FormPage extends Component {
     }
   }
 
+  _allDataProvided = () => {
+    const { firstName, lastName, email, nationalId, phoneNumber,
+            collegeEduStatus, otherUnivInfo, isBachelor, isMaster, isPhd,
+            bachelorsId, bachelorsClass, masterId, masterClass, masterInfo, phdId, phdClass, phdInfo,
+            areasOfInterest,
+            isWeekly, weeklyHours, isWorkshop, workshopDuration,
+            hasExperience, experienceDetail } = this.state
+
+    let status = true
+
+    if (firstName === '' || lastName === '' || nationalId === '' || phoneNumber === '' || email === '') {
+      status = false
+      console.log('SDADSADSADSADDSA')
+    }
+
+    if (collegeEduStatus === 'NONE') {
+      status = false
+      console.log('1')
+    } if (collegeEduStatus === 'OTHER' && otherUnivInfo === '') {
+      status = false
+      console.log('2')
+    } else if (collegeEduStatus === 'UT') {
+      if (!isBachelor && !isMaster && !isPhd) {
+        status = false
+        console.log('3')
+      }
+
+      if (isBachelor) {
+        if (bachelorsId === '' || bachelorsClass === '') {
+          status = false
+          console.log('4')
+        }
+      }
+
+      if (isMaster) {
+        if (masterId === '' || masterClass === '') {
+          status = false
+          console.log('5')
+        }
+      }
+
+      if (isPhd) {
+        if (phdId === '' || phdClass === '') {
+          status = false
+          console.log('6')
+        }
+      }
+    }
+
+    if (areasOfInterest.length === 0) {
+      console.log('areasOfInterest.length === 0')
+      status = false
+    }
+
+    if (!isWeekly && !isWorkshop) {
+      status = false
+      console.log('!isWeekly && !isWorkshop')
+    } else {
+      if (isWeekly) {
+        console.log('isWeekly')
+        console.log(weeklyHours)
+        let allEmpty = true
+        weeklyHours.forEach((item) => {
+          if (item !== '') {
+            allEmpty = false
+          }
+        })
+        if (allEmpty) {
+          console.log('allEmpty')
+          status = false
+        }
+      }
+
+      if (isWorkshop && workshopDuration === 0) {
+        console.log('workshopDuration === 0')
+        status = false
+      }
+    }
+
+    if (hasExperience && experienceDetail === '') {
+      console.log('experienceDetail === ')
+      status = false
+    }
+
+    let resumeFileInput = document.getElementById('resumeFile')
+    let resume = resumeFileInput.files[0]
+
+    if (!resume) {
+      console.log('!resume')
+      status = false
+    }
+
+    return status
+  }
+
   _sendFormData = (event) => {
     event.preventDefault()
 
-    let fileUploaded = false
+    if (!this._allDataProvided()) {
+      this._invalidSubmit()
+      return
+    }
 
     let resumeFileInput = document.getElementById('resumeFile')
     let resume = resumeFileInput.files[0]
@@ -92,6 +190,7 @@ export default class FormPage extends Component {
     addFormEntryApi(newEntry, resume).then((response) => {
       if (response === true) {
         this._successfulSubmit()
+        window.location.reload()
       } else {
         this._failedSubmit()
       }
@@ -100,10 +199,17 @@ export default class FormPage extends Component {
 
   _successfulSubmit = () => {
     this.setState({submissionStatus: 'SUCCESS'})
+    alert(PersianDict['success msg'])
+  }
+
+  _invalidSubmit = () => {
+    this.setState({submissionStatus: 'FAIL'})
+    alert(PersianDict['failure msg'])
   }
 
   _failedSubmit = () => {
     this.setState({submissionStatus: 'FAIL'})
+    alert(PersianDict['server error msg'])
   }
 
   _handleFirstNameChange = (newValue) => {
@@ -229,9 +335,6 @@ export default class FormPage extends Component {
     this.setState({weeklyHours: newWeeklyHours})
   }
 
-  // _handleFileUpload = (file) => {
-  //   this.setState({resume: file})
-  // }
 
   render () {
     return (
@@ -316,7 +419,6 @@ export default class FormPage extends Component {
               <BackgroundInfo
                 handleHasExperienceChange={this._handleHasExperienceChange}
                 handleExperienceDetailChange={this._handleExperienceDetailChange}
-                handleFileUpload={this._handleFileUpload}
               />
 
               <br/><br/>
@@ -326,10 +428,6 @@ export default class FormPage extends Component {
                   {PersianDict['send info']}
                 </button>
               </div>
-
-              {this.state.submissionStatus === 'SUCCESS' && <div>OK SUBMISSION</div>}
-              {this.state.submissionStatus === 'FAIL' && <div>FAIL SUBMISSION</div>}
-              {this.state.submissionStatus === 'NOT_SUBMITTED' && <div>NOT SUBMITTED</div>}
             </form>
           </div>
         </div>

@@ -80,11 +80,11 @@ export default class WeeklyHours extends Component {
             <input
               className="input-radio3"
               type="checkbox"
-              id='checkbox-0'
+              id={`checkbox-0-${weekDays[0]}`}
               value={weekDays[0]}
               onChange={this._onSatClick}
             />
-            <label className="label-radio3 contact3-form-text-answer" for='checkbox-0'>
+            <label className="label-radio3 contact3-form-text-answer" htmlFor={`checkbox-0-${weekDays[0]}`}>
               {PersianDict[weekDays[0]]}
             </label>
           </div>
@@ -100,11 +100,11 @@ export default class WeeklyHours extends Component {
             <input
               className="input-radio3"
               type="checkbox"
-              id='checkbox-1'
+              id={`checkbox-1-${weekDays[1]}`}
               value={weekDays[1]}
               onChange={this._onSunClick}
             />
-            <label className="label-radio3 contact3-form-text-answer" for='checkbox-1'>
+            <label className="label-radio3 contact3-form-text-answer" htmlFor={`checkbox-1-${weekDays[1]}`}>
               {PersianDict[weekDays[1]]}
             </label>
           </div>
@@ -120,11 +120,11 @@ export default class WeeklyHours extends Component {
             <input
               className="input-radio3"
               type="checkbox"
-              id='checkbox-2'
+              id={`checkbox-2-${weekDays[2]}`}
               value={weekDays[2]}
               onChange={this._onMonClick}
             />
-            <label className="label-radio3 contact3-form-text-answer" for='checkbox-2'>
+            <label className="label-radio3 contact3-form-text-answer" htmlFor={`checkbox-2-${weekDays[2]}`}>
               {PersianDict[weekDays[2]]}
             </label>
           </div>
@@ -140,11 +140,11 @@ export default class WeeklyHours extends Component {
             <input
               className="input-radio3"
               type="checkbox"
-              id='checkbox-3'
+              id={`checkbox-3-${weekDays[3]}`}
               value={weekDays[3]}
               onChange={this._onTueClick}
             />
-            <label className="label-radio3 contact3-form-text-answer" for='checkbox-3'>
+            <label className="label-radio3 contact3-form-text-answer" htmlFor={`checkbox-3-${weekDays[3]}`}>
               {PersianDict[weekDays[3]]}
             </label>
           </div>
@@ -160,11 +160,11 @@ export default class WeeklyHours extends Component {
             <input
               className="input-radio3"
               type="checkbox"
-              id='checkbox-4'
+              id={`checkbox-4-${weekDays[4]}`}
               value={PersianDict[weekDays[4]]}
               onChange={this._onWedClick}
             />
-            <label className="label-radio3 contact3-form-text-answer" for='checkbox-4'>
+            <label className="label-radio3 contact3-form-text-answer" htmlFor={`checkbox-4-${weekDays[4]}`}>
               {PersianDict[weekDays[4]]}
             </label>
           </div>
@@ -180,11 +180,11 @@ export default class WeeklyHours extends Component {
             <input
               className="input-radio3"
               type="checkbox"
-              id='checkbox-5'
+              id={`checkbox-5-${weekDays[5]}`}
               value={PersianDict[weekDays[5]]}
               onChange={this._onThuClick}
             />
-            <label className="label-radio3 contact3-form-text-answer" for='checkbox-5'>
+            <label className="label-radio3 contact3-form-text-answer" htmlFor={`checkbox-5-${weekDays[5]}`}>
               {PersianDict[weekDays[5]]}
             </label>
           </div>

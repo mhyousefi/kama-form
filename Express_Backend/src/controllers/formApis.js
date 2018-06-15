@@ -23,18 +23,12 @@ zipFolderPromise = function (x, y) {
     zipFolder(x, y, resolve)
   })
 }
-router.get('/getUploads', async (req, res) => {
-  let result = `/tmp/uploads ${Date.now()}.zip`
-  await zipFolderPromise(uploadsDir, result)
-  res.contentType('application/zip')
-  res.sendFile(result)
-})
 
 router.post('/addEntry',upload.single('file'), async (req, res) => {
   try {
     let params = await req.body
     params = JSON.parse(params.formData)
-    // const fileName = req.file.filename()
+    const fileName = req.file.filename
     const entryCount = await formEntryRepo.getEntryCount()
     const newEntry = {
       id: entryCount.toString(),
@@ -61,7 +55,7 @@ router.post('/addEntry',upload.single('file'), async (req, res) => {
       weeklyHours: JSON.stringify(params.weeklyHours),
       isWorkshop: params.isWorkshop,
       workshopDuration: params.workshopDuration,
-      // resumeFilename: fileName,
+      resumeFilename: fileName,
     }
     await formEntryRepo.addFormEntry(newEntry)
     res.send(JSON.stringify({status: 'OK'}))
@@ -91,15 +85,14 @@ router.get('/getAllEntries', async (req, res) => {
   } catch (e) {}
 })
 
-router.post('/uploadFile', async (req, res) => {
-  try {
-    const rrr = req
-    console.log(`REQUEST BODY IS =====> ${JSON.stringify(rrr)}`)
-    res.send(JSON.stringify({status: 'OK'}))
-  } catch (e) {}
+router.get('/kama-93-summer-private/getResumes', async (req, res) => {
+  let result = `/tmp/uploads ${Date.now()}.zip`
+  await zipFolderPromise(uploadsDir, result)
+  res.contentType('application/zip')
+  res.sendFile(result)
 })
 
-router.get('/', async (req, res) => {
+router.get('/kama-93-summer-private/getAllResults', async (req, res) => {
   let excelData = []
   const entries = await formEntryRepo.getAllEntries()
   entries.forEach((item) => {

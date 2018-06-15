@@ -23,11 +23,11 @@ export default class CheckboxQuestion extends Component {
               <input
                 className="input-radio3"
                 type="checkbox"
-                id={'checkbox-' + answer}
+                id={`checkbox-${questionTxt}-${answer}`}
                 value={answer}
                 onChange={this._onChange}
               />
-              <label className="label-radio3 contact3-form-text-answer fs-18" htmlFor={'checkbox-' + answer}>
+              <label className="label-radio3 contact3-form-text-answer fs-18" htmlFor={`checkbox-${questionTxt}-${answer}`}>
                 {answer}
               </label>
             </div>

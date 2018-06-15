@@ -37,6 +37,7 @@ export default class CollegeEduInfo extends Component {
     const { handleBachelorIdChange, handleBachelorClassChange,
             handleMasterIdChange, handleMasterClassChange, handleMasterInfoChange,
             handlePhdIdChange, handlePhdClassChange, handlePhdInfoChange } = this.props
+
     return (
       <div>
         <span className="contact3-form-text-question">
@@ -52,7 +53,7 @@ export default class CollegeEduInfo extends Component {
               value={answers[0]}
               onChange={this._onBachelorChange}
             />
-            <label className="label-radio3 contact3-form-text-answer" for='checkbox-0'>
+            <label className="label-radio3 contact3-form-text-answer" htmlFor='checkbox-0'>
               {answers[0]}
             </label>
           </div>
@@ -73,7 +74,7 @@ export default class CollegeEduInfo extends Component {
               value={answers[1]}
               onChange={this._onMasterChange}
             />
-            <label className="label-radio3 contact3-form-text-answer" for='checkbox-1'>
+            <label className="label-radio3 contact3-form-text-answer" htmlFor='checkbox-1'>
               {answers[1]}
             </label>
           </div>
@@ -94,7 +95,7 @@ export default class CollegeEduInfo extends Component {
               value={answers[2]}
               onChange={this._onPhdChange}
             />
-            <label className="label-radio3 contact3-form-text-answer" for='checkbox-2'>
+            <label className="label-radio3 contact3-form-text-answer" htmlFor='checkbox-2'>
               {answers[2]}
             </label>
           </div>
