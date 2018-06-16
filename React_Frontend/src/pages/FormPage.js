@@ -8,6 +8,7 @@ import CollegeEduInfo from '../components/CollegeEduInfo'
 import BackgroundInfo from '../components/BackgroundInfo'
 import ClassTimingInfo from '../components/ClassTimingInfo'
 import { addFormEntryApi } from '../api/FormEntryApis'
+import { CircularProgress, MuiThemeProvider } from 'material-ui'
 import '../css/main.css'
 import '../css/texts.css'
 import '../css/util.css'
@@ -153,6 +154,8 @@ export default class FormPage extends Component {
       this._invalidSubmit()
       return
     }
+
+    this.setState({submissionStatus: "SUBMITTING"})
 
     let resumeFileInput = document.getElementById('resumeFile')
     let resume = resumeFileInput.files[0]
@@ -435,15 +438,17 @@ export default class FormPage extends Component {
 
                 <br/><br/>
 
+                {this.state.submissionStatus === 'SUBMITTING' && <MuiThemeProvider className="rtl">
+                  <CircularProgress size={100} thickness={7} style={{ color: 'purple' }}/>
+                </MuiThemeProvider>}
+
+                <br/><br/>
+
                 <div className="container-contact3-form-btn">
                   <button className="contact3-form-btn" onClick={this._sendFormData}>
                     {PersianDict['send info']}
                   </button>
                 </div>
-
-                <span className="contact3-form-text-answer rtl">
-                  {PersianDict['please wait']}
-                </span>
               </form>
             </div>
           </div>
