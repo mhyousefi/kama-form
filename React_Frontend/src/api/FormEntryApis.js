@@ -30,7 +30,13 @@ export const addFormEntryApi = async (newEntry, file) => {
     workshopDuration: newEntry.workshopDuration,
   }))
 
-  return fetch (apiUrls['addEntry'], {
+  let requestUrl = apiUrls['addEntry_http']
+
+  if (window.location.protocol === 'https:') {
+    requestUrl = apiUrls['addEntry_https']
+  }
+
+  return fetch (requestUrl, {
     method: 'POST',
     mode: 'cors',
     body: body,
