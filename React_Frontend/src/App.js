@@ -18,7 +18,7 @@ class App extends Component {
     return (
       <Switch>
         <Route
-          exact path="/"
+          path="/"
           render={this._renderFormPage}
         />
       </Switch>
@@ -27,3 +27,4 @@ class App extends Component {
 }
 
 export default App
+

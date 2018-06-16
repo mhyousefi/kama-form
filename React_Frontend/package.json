@@ -1,9 +1,11 @@
 {
   "name": "kama-form",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "fetch": "^1.1.0",
+    "material-ui": "^0.20.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-router": "^4.3.1",

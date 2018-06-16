@@ -38,9 +38,17 @@ export default class ClassTimingInfo extends Component {
     const { handleWeeklyHoursChange } = this.props
     return (
       <div>
-        <span className="contact3-form-text-question fs-24">
+        <span className="contact3-form-text-question fs-24 rtl">
           {question}
         </span>
+
+        <br/>
+
+        <span className="contact3-form-text-answer rtl">
+          {PersianDict['you can choose both']}
+        </span>
+
+        <br/>
 
         <div className="wrap-contact3-form-radio m-r-42">
           <div className="contact3-form-radio m-r-42">
