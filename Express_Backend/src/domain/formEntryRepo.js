@@ -63,6 +63,18 @@ const getEntryCount = async (errCallback) => {
   }
 }
 
+const deleteFormEntry = async (id, errCAllback) => {
+  try {
+    return await FormEntries.create({ id: id }).then(entry => {
+      return entry.destroy({ force: true });
+    }).then(() => {
+      console.log(`Deleted form entry with id ${id}`)
+    })
+  } catch (err) {
+    errCallback(new Error(err.message))
+  }
+}
+
 const getAllEntries = async (errCallback) => {
   try {
     return await FormEntries.findAndCountAll({where: {}}).then(results => {
@@ -87,3 +99,4 @@ module.exports.addFormEntry = addFormEntry
 module.exports.getFormEntryByID = getFormEntryByID
 module.exports.getEntryCount = getEntryCount
 module.exports.getAllEntries = getAllEntries
+module.exports.deleteFormEntry = deleteFormEntry
